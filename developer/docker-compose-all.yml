@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: "postgres:14.0-alpine" 
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=labterm
+      - POSTGRES_USER=labterm
+      - POSTGRES_DB=labterm
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - ELASTIC_PASSWORD=labterm2
+      - xpack.security.enabled=true
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.14.2
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=labterm2
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+
+  filebeat:
+    image: "docker.elastic.co/beats/filebeat:7.14.2"
+    container_name: filebeat
+    user: root
+    volumes:
+        - ./config/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+        - /var/lib/docker:/var/lib/docker:ro
+        - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - elastic
+
+volumes:
+  elasticsearch-data:
+    driver: local
+  postgres-data:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge

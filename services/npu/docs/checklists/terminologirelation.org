@@ -1,0 +1,42 @@
+* Guideline - Nyt modul terminologirelation
+
+
+242. Kopier OrganisationNote til XyzNote og søg og erstat organisation med xyz (bevar case)
+244. Kopier note-ddl fra V10__organisation.sql til Vx00_xyz.sql og søg og erstat organisation med xyz (bevar case)
+
+260. Optionelt - tilføj eksempelattributter i migration insert statements
+
+310. Kopier src/main/java/cgi/labterm/services/npu/controller/OrganisationController.java til ../TerminologirelationController.java og lav søg-og-erstat i filen med organisation til terminologirelation (bevar case)
+320. Tilret controllerklasse
+250. Sikkert et godt tidspunkt at afvikle test for at se at tabeller kan oprettes og det hele compilerer
+33.
+    
+   
+create or replace function trigger_on_Terminologirelation_revision()
+    returns trigger
+    language plpgsql as $body$
+begin
+
+ if false or old.status<> new.status or old.virkning_fra<> new.virkning_fra or old.releasecenter_kort_navn<> new.releasecenter_kort_navn or old.elementbegreb_kode<> new.elementbegreb_kode or old.npu_kode<> new.npu_kode or old.terminologi<> new.terminologi or old.begreb<> new.begreb or old.relationstype<> new.relationstype or old.maalbegreber<> new.maalbegreber then
+       if old.updated_at is null then
+            insert into Terminologirelation_revisions (Terminologirelation_id, created_at, brugernavn, optlock, status, virkning_fra, releasecenter_kort_navn, elementbegreb_kode, npu_kode, terminologi, begreb, relationstype, maalbegreber)
+            values (old.id, old.created_at, old.brugernavn, old.optlock, old.status, old.virkning_fra, old.releasecenter_kort_navn, old.elementbegreb_kode, old.npu_kode, old.terminologi, old.begreb, old.relationstype, old.maalbegreber);
+        else
+            if old.updated_at <> new.updated_at then
+            insert into Terminologirelation_revisions (Terminologirelation_id, created_at, brugernavn, optlock ,status ,virkning_fra ,releasecenter_kort_navn ,elementbegreb_kode ,npu_kode ,terminologi ,begreb ,relationstype ,maalbegreber)
+            values (old.id, old.updated_at, old.brugernavn, old.optlock , old.status, old.virkning_fra, old.releasecenter_kort_navn, old.elementbegreb_kode, old.npu_kode, old.terminologi, old.begreb, old.relationstype, old.maalbegreber);
+           else
+              RAISE EXCEPTION 'updated_at er ikke opdateret - insert i Terminologirelation_revions vil fejle';
+            end if;        end if;
+    end if;
+    -- Return the `NEW` record so that update can carry on as usual
+    return new;
+end; $body$;
+
+DROP TRIGGER IF EXISTS trigger_Terminologirelation_revision on "Terminologirelation";
+
+create trigger trigger_Terminologirelation_revision
+  before update
+  on Terminologirelation
+  for each row
+execute procedure trigger_on_Terminologirelation_revision();

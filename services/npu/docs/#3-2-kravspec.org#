@@ -1,0 +1,1461 @@
+Underbilag 3.1: Kravspecifikation
+LabTerm2
+Version 1.0 – 18.09.2020
+Version 1 3. august 2020
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 2 af 87
+* INDHOLDSFORTEGNELSE
+1 BAGGRUND FOR LEVERANCEN ...................................................................... 4
+2 FORRETNINGSMÆSSIGE BEHOV ................................................................... 7
+FORMÅL OG RAMMER ........................................................................................................................... 7
+OMFANG AF LEVERANCEN .................................................................................................................... 7
+3 NPU-TERMINOLOGIEN .................................................................................. 9
+NPU – KONCEPTUELT ......................................................................................................................... 9
+Terminologiens volumen, vækst og indhold ......................................................... 12
+Eventuelle supplerende NPU-derivater ................................................................ 13
+NPU - LOGISK MODEL ....................................................................................................................... 13
+NPU-elementers livscyklus og historik ................................................................. 14
+NOGLE OVERORDNEDE FORRETNINGSREGLER ................................................................................... 15
+4 FORRETNINGSMÆSSIG ANVENDELSE ......................................................... 16
+ROLLER OG RELEASECENTRE ............................................................................................................. 16
+International redaktør ....................................................................................... 17
+National redaktør .............................................................................................. 17
+Registreret bruger ............................................................................................. 17
+Anonym bruger ................................................................................................. 17
+Administrator .................................................................................................... 18
+Brugerstyring .................................................................................................... 18
+GENEREL FUNKTIONALITET FOR REDAKTØRER ................................................................................... 18
+Overordnet generel funktionalitet ....................................................................... 19
+Generel funktionalitet vedrørende de centrale views ............................................. 22
+FUNKTIONALITET VEDRØRENDE DE CENTRALE VIEWS........................................................................ 26
+Elementbegreb-view med userstories .................................................................. 26
+Organisation-view med userstories ..................................................................... 31
+NpuBegreb-view med userstories ....................................................................... 35
+Søgeterm-view med userstories.......................................................................... 42
+Brugsnavn-view med userstories ........................................................................ 45
+Terminologirelation-view med userstories .....element....................................................... 49
+PUBLIKATION .................................................................................................................................... 53
+Centralt release ................................................................................................ 53
+Nationalt release ............................................................................................... 55
+API-adgang til tidstro NPU-data .......................................................................... 57
+Web-portal ....................................................................................................... 57
+5 FUNKTIONELLE KRAV ................................................................................... 61
+KRAV VEDR. BESVARELSENS UDFORMNING ........................................................................................ 61
+KRAV VEDR. NPU-TERMINOLOGIENS STRUKTUR ............................................................................... 62
+KRAV VEDR. ROLLER OG RELEASECENTRE .......................................................................................... 63
+KRAV VEDR. GENEREL FUNKTIONALITET FOR REDAKTØRER ............................................................... 65
+KRAV VEDR. FUNKTIONALITET KNYTTET TIL CENTRALE VIEWS .......................................................... 66
+KRAV VEDR. PUBLIKATION................................................................................................................. 69
+6 NON-FUNKTIONELLE KRAV .......................................................................... 70
+ARKITEKTUR ..................................................................................................................................... 70
+OVERORDNEDE TEKNISKE KRAV ........................................................................................................ 71
+LOGISK OG KONCEPTUEL MODEL ....................................................................................................... 72
+KRAV VEDRØRENDE MIGRERING AF DATA .......................................................................................... 73
+KRAV TIL DESIGN AF BRUGERGRÆNSEFLADER ................................................................................... 74
+LEVERANCE ....................................................................................................................................... 78
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 3 af 87
+7 OPTIONER .................................................................................................... 80
+OPTION-1: VIDEREUDVIKLING .......................................................................................................... 80
+OPTION-2: PRÆPRODUKTIONSMILJØ ............................................................................................... 80
+OPTION-3: FORLÆNGELSE AF KONTRAKTEN ..................................................................................... 80
+APPENDIX-1. TERMER OG BEGREBER ........................................................................ 82
+APPENDIX-2: TRL-SKALA FOR SOFTWARE ................................................................. 86
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 4 af 87
+* 1 BAGGRUND FOR LEVERANCEN
+NPU-terminologien er en international, engelsksproget termino- logi, der spænder over godt 50.000 begreber, hvoraf ca. 27.000 er aktive. Den er beregnet til identifikation af undersøgelsesre- sultater inden for det kliniske laboratorieområde og er primært udviklet til journalbrug, sekundært til kvalitetssikring, forskning og statistik på nationalt plan. Terminologien anvendes pt. natio- nalt i Danmark, Norge og Sverige samt sporadisk i enkelte andre lande.
+NPU-terminologien danner grundlag for struktureret elektronisk kommunikation af laboratoriedata på tværs af organisationer og landegrænser og har siden 2001 været den anbefalede termino- logiske standard for kommunikation og administration af labora- torieresultater i Danmark.
+NPU-terminologien ejes af International Federation of Clinical Chemistry and Laboratory Medicine (IFCC1) og International Un- ion of Pure and Applied Chemistry (IUPAC2).
+
+I 2014 indgik Sundhedsdatastyrelsen3 (tidligere National Sund- heds-IT) en aftale med NPU-terminologiens ejere, hvori det blev formaliseret, at Sundhedsdatastyrelsen fungerer som terminolo- giens internationale releasecenter (IRC) og dermed er ansvarlig for administration, vedligeholdelse og løbende publicering af den internationale version af NPU-terminologien. Denne aftale er i efteråret 2019 forlænget til primo 2023 efter aftale med IFCC og IUPAC.
+Med henblik på at sikre terminologiens praktiske anvendelse an- vendes i de forskellige lande nationale - oversatte – versioner af terminologien. Der har desuden vist sig at være behov for natio- nale ekstensioner af terminologien til identifikation af undersø- gelsesresultater, som kun har mening i en bestemt national kon- tekst.
+Oversættelse, vedligeholdelse og publicering af terminologiens nationale versioner og ekstensioner skal ske i henhold til 'Li- cense and Terms of use'4 udarbejdet af terminologiens besty- relse. Betingelserne heri skal beskytte NPU-terminologien og NPU-'brandet' og er bindende for alle brugere af terminologien. De overordnede retningslinjer er skitseret i afsnit 3.1 om den overordnede NPU-model.
+
+Nationale NPU-versioner og -ekstensioner varetages af nationale releasecentre (NRC), hvoraf der pt. findes tre - et svensk, et norsk og et dansk. Man forudser og ønsker, at NPU-terminolo- gien vil finde yderligere udbredelse.
+IRC og det danske NRC er begge hjemmehørende i Sundhedsda- tastyrelsen og deler de samme ressourcer. Dette sammenfald har haft stor betydning for den infrastruktur, som hidtil er an- vendt til udvikling, vedligeholdelse og publicering af terminolo- gien.
+Det it-system, som aktuelt rummer NPU-terminologien ("Lab- Term"5), er et dansk-udviklet system, som blev skræddersyet til at understøtte arbejdet i Sundhedsdatastyrelsen – dvs. kombi- nationen af internationalt og dansk terminologiarbejde uden skarp skelnen mellem disse.
+Systemet er nu ca. 10 år gammelt. Der er kun sket mindre op- dateringer i systemets levetid, og det frembyder i forhold til nu- tidige krav en række mangler og problemstillinger:
+- På en række punkter rummer systemet en sammenblan- ding af internationalt og dansk terminologiarbejde. Det er således ikke muligt at adskille historik, noter, mm. fra de to NPU-versioner.
+- Den anvendte it-platform er forældet. Den er aldrig blevet opdateret, og kan ikke opgraderes. Der foreligger ikke en vedligeholdelssaftale og dokumentation for systemæn- dringer og test over tid foreligger ikke.
+- Publiceringen af den danske og sær den internationale version af NPU-terminologien er inkomplet og primitiv i forhold til nutidige krav.
+- Samarbejdet med releasecentrene i Norge og Sverige om- fatter pga. det nuværende systems udformning manuel datahåndtering i stort omfang, hvilket jævnligt medfører inkonsistens. Et effektivt teknisk samarbejde mellem rele- asecentrene og den internationale drift kan ikke etableres med den nuværende løsning.
+
+På denne baggrund er det besluttet at tilvejebringe et nyt it-sy- stem, som i højere grad kan sikre stabil udvikling, drift og publi- kation af NPU-terminologien.
+
+Med henblik på at danne grundlag for udformning af nærvæ- rende kravspecifikation, blev der i april 2018 udført en forunder- søgelse6 med henblik på at afklare:
+- om den datamodel, der ligger til grund for den nuværende løsning, kan omstruktureres og udvides for at fungere
+som et nyt internationalt system med oversættelses- og publiceringsfunktion og med dataeksport til andre natio- nale releasesystemer
+- om de norske og svenske NRC kan indgå i et samarbejde med Sundhedsdatastyrelsen om et fælles system til drift og vedligeholdelse af den international og evt. national NPU-terminologi
+- om et fælles system kan varetage de nationale ekstensio- ner (DNK-, NOR- og SWE-begreber), oversættelser og na- tionale brugsnavne, som er knyttet til NPU-terminologien
+- om der med fordel kan indkøbes et 'standardsystem' som kan tilpasses med de nødvendige funktionaliteter til vare- tagelse af drift og vedligeholdelse af NPU-terminologien
+Med udgangspunkt i forundersøgelsens anbefalinger tilstræber man i denne kravspecifikation at beskrive et system, der tager afsæt i erfaringerne med det eksisterende Labterm-system, og som i videst muligt omfang kan videreføre release-teamets ind- arbejdede funktioner og metoder.
+
+* 2 FORRETNINGSMÆSSIGE BEHOV
+Formål og rammer
+NPU-terminologien ("Laboratorieklassifikationen") er essentiel for den danske udveksling af kliniske undersøgelsesresultater. Der håndteres årligt ca. 150 mill. prøver i Danmark hvor NPU danner grundlaget for bestilling og svarafgivelse. Terminologien er også i både Sverige og Norge udgangspunktet for struktureret udveksling af klinisk information.
+Sundhedsdatastyrelsen er ansvarlig for den løbende vedligehol- delse og publikation af både den internationale NPU-terminologi og dens danske oversættelse. Det hidtidige arbejde med termi- nologien er udført ved hjælp af et til formålet udviklet it-værk- tøj, som aktuelt eksisterer på en forældet platform og udgangs- punktet har nogle mindre, modelmæssige mangler, og hvor funktionaliteten ikke kan stilles til rådighed for andre end Sund- hedsdatastyrelsens medarbejdere.
+Sundhedsdatastyrelsen ønsker med nærværende udbud at tilve- jebringe et it-system – herefter benævnt Løsningen - til fortsat vedligeholdelse og publikation af NPU-terminologien, og som
+- i væsentlig grad viderefører den funktionalitet og de ar- bejdsgange, som det nuværende skræddersyede system tilbyder, og som afspejler de sidste 10 års erfaringer med internationalt og dansk NPU-arbejde
+- stiller national funktionalitet til rådighed primært for det danske releasecenter, men også for andre releasecentre med henblik på at opnå et mere effektivt teknisk samarbejde
+- kan importere og eksportere udvalgte internationale og nationale NPU-data i relevante formater
+Den efterspurgte Løsningen kan overordnet beskrives som et værktøj til løbende redigering og publikation af international NPU. Løsningen skal desuden understøtte løbende redigering og publikation af danske NPU-derivater. På sigt skal Løsningen kunne udvides til også at understøtte redigering og publikation af andre nationale NPU-derivater.
+Omfang af leverancen
+Udbuddet omfatter levering af et værktøj dedikeret til vedlige- holdelse, videreudvikling og publikation af NPU-terminologien.
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 8 af 87
+NPU-værktøjet (Løsningen) skal leveres klar til drift, inklusive al nødvendig dokumentation for at Sundhedsdatastyrelsen kan op- retholde den daglige drift af NPU-terminologien, herunder vedligeholde, videreudvikle og publicere international og dansk NPU-terminologi.
+NPU-værktøjet (Løsningen) består af tre dele:
+- Et redigeringsværktøj i form af en applikation, hvis fulde funktionalitet kan tilgåes via Internettet. I redigerings- værktøjet kan internationale og nationale redaktører ved- ligeholde terminologi-data
+- Et publikationsværktøj i form af et API, hvor godkendte brugere kan hente tidstro terminologi-data
+- Et publikationsværktøj i form af en web-portal, hvor bru- gere dels kan hente præformerede udtræk (releases), dels kan foretage søgning og download af visse termino- logi-data.
+Løsningen skal på sigt kunne udvides til desuden at kunne un- derstøtte, at andre nationale release-teams anvender værktøjet på lige fod med det danske NRC, jf. indledningen af kapitel 4 og kravene i afsnit 5.3.
+Tekst vedr. labterm
+Udbuddet omfatter levering af et værktøj dedikeret til vedlige- holdelse, videreudvikling og publikation af NPU-terminologien.
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 9 af 87
+NPU-værktøjet (Løsningen) skal leveres klar til drift, inklusive al nødvendig dokumentation for at Sundhedsdatastyrelsen kan op- retholde den daglige drift af NPU-terminologien, herunder vedligeholde, videreudvikle og publicere international og dansk NPU-terminologi.
+NPU-værktøjet (Løsningen) består af tre dele:
+- Et redigeringsværktøj i form af en applikation, hvis fulde funktionalitet kan tilgåes via Internettet. I redigerings- værktøjet kan internationale og nationale redaktører ved- ligeholde terminologi-data
+- Et publikationsværktøj i form af et API, hvor godkendte brugere kan hente tidstro terminologi-data
+- Et publikationsværktøj i form af en web-portal, hvor bru- gere dels kan hente præformerede udtræk (releases), dels kan foretage søgning og download af visse termino- logi-data.
+Løsningen skal på sigt kunne udvides til desuden at kunne un- derstøtte, at andre nationale release-teams anvender værktøjet på lige fod med det danske NRC, jf. indledningen af kapitel 4 og kravene i afsnit 5.3.
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 10 af 87
+* 3 NPU-TERMINOLOGIEN
+NPU-terminologien består af en international del, som vedlige- holdes og publiceres af det internationale releasecenter (IRC). På grundlag af denne foretager de nationale releasecentre (NRC) i Danmark, Sverige og Norge oversættelser og ekstensioner, så- ledes at de hver for sig publicerer nationale NPU-versioner.
+I denne kravspecifikation indgår både en konceptuel og en logisk model for NPU-terminologien. Forskellen på disse to modeltyper er beskrevet i flere sammenhænge – en simpel forklaring kan fx findes i Wikipedia7. I nærværende kravspecifikation beskriver den konceptuelle model, hvordan NPU-terminologien overordnet er opbygget, dvs. terminologiens semantiske struktur, mens den logiske model på et abstrakt niveau beskriver de klasser, egen- skaber og relationer, som et it-system skal kunne behandle for til fulde at kunne understøtte terminologiens vedligeholdelse.
+Det skal bemærkes, at kravspecifikationen ikke beskriver og ikke stiller krav til den fysiske model, som skal implementere sy- stemet udover, at den skal respektere den beskrevne logiske model.
+Den konceptuelle model for international NPU og dens nationale derivater - oversættelser og ekstensioner - er beskrevet herun- der i afsnit 3.1. I det efterfølgende afsnit 3.2 introduceres NPU- terminologiens logiske model, som mere detaljeret er beskrevet i selvstændigt underbilag 3.4.
+NPU – konceptuelt
+NPU-terminologien er overordnet opbygget som illustreret på Figur 1:
+Figur 1. NPU-modellen, overordnet
+7 Wikipedia om logisk model: https://en.wikipedia.org/wiki/Logical_schema
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 11 af 87
+Ex. lang og kort helterm (dansk)
+NPU-kode:
+NPU17548
+Lang helterm:
+Sekret(Ileum)—Calcium; stofkoncentration = ? millimol per liter Kort helterm:
+Sekr(Ileum)—Calcium; stofk. = ? mmol/L
+Et NPU-begreb er defineret gennem en unik rækkefølge af til- knyttede Elementbegreber. Elementbegreberne er overordnet altid ordnet i en rækkefølge af Syntaxgrupper:
+System => Komponent => Egenskabsart => Enhed
+Elementbegrebernes rækkefølge indenfor den enkelte Syntaxgruppe er signifikant og altså en del af NPU-begrebets definition.
+Hvert Elementbegreb har en Elementterm, og når Elementter- merne anføres i rækkefølgen givet af Elementbegreberne, dan- nes NPU-begrebets Lange helterm. Den Korte helterm dannes på samme måde, blot med forkortede Elementtermer.
+NPU-terminologiens elementer kan også vises skematisk, som det er gjort på Figur 2:
+Figur 2. NPU-modellen, skematisk
+Figur 2 illustrerer, hvordan hvert af et NPU-begrebs tilknyttede Elementbegreber har en definerende reference – typisk i form af link til en standardiserende organisation - og en Elementterm med både en fuld og en forkortet term. Der kan til både Element- og NPU-begreber knyttes søgetermer.
+Nogle undersøgelser kan rekvireres, men har ikke et entydigt re- sultat – fx blodgasanalyse, der omfatter flere resultater, og hvor
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 12 af 87
+udvalget af resultater ikke nødvendigvis er foruddefineret. Så- danne undersøgelser kan i NPU udtrykkes som et NPU-begreb, der har en række tilknyttede NPU-begreber – foreslåede resul- tattyper – samlet i en NPU-gruppe.
+For hele Figur 2 gælder, at de viste elementer er sådanne, som dannes og vedligeholdes af det internationale NPU-releasecen- ter. Med henblik på at understøtte NPU-terminologiens nationale anvendelse, kan nationale releasecentre ønske at oversætte (dele af) terminologien. Dette er illustreret på Figur 3:
+Figur 3. NPU-modellen, dansk oversættelse
+Figur 3 viser – i forhold til forrige figur – hvordan et nationalt re- leasecenter oversætter international NPU ved at tilføje nationale Elementtermer, Søgetermer og Brugsnavne.
+I de således oversatte NPU-versioner dannes Lang helterm og Kort helterm på samme måde, som beskrevet ovenfor, dvs. Ele- menttermernes bidrag anføres i den rækkefølge, som deres Ele- mentbegreber optræder i.
+Brugsnavne (tidligere: ”trivialnavne”) adskiller sig fra NPU-be- grebernes heltermer både med hensyn til syntaks og præcision. De kræver derfor reference til en organisation, som vil autori- sere dem til klinisk anvendelse – typisk et medicinsk specialesel- skab.
+Der kan nationalt desuden være behov for udvidelser af den in- ternationale NPU-terminologi med begreber, som kun har natio- nal relevans – fx analyser med særlige nationale beregningsreg- ler. NPU-modellen gør det muligt at foretage udvidelse både med nationale Elementbegreber, NPU-begreber og NPU-grupper, som det er illustreret på Figur 4:
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 13 af 87
+Figur 4. NPU-modellen, dansk udvidelse
+Figur 4 illustrerer, hvordan man nationalt kan udvide den inter- nationale NPU-terminologi med nationale NPU-begreber. Disse vil ofte være defineret alene gennem en (unik) række af interna- tionale Elementbegreber, men modellen åbner desuden mulig- hed for, at man i mangel på internationale Elementbegreber kan udvide med nationale Elementbegreber – selvfølgelig med hvad dertil hører af definitioner og Elementtermer.
+Som illustreret er det desuden muligt at udvide den internatio- nale terminologi med nationale NPU-grupper. Ofte vil disse blot udtrykke en samling af internationale NPU-begreber med særlig national relevans, men det er også muligt i de nationale NPU- grupper at inkludere sine nationale NPU-begreber.
+Terminologiens volumen, vækst og indhold
+Med henblik på at give en indikation af NPU-terminologiens stør- relse, er her angivet estimater for antal NPU-elementer og deres forventede årlige tilvækst:
+NPU-elementer Antal Tilvækst (antal / år) NpuBegreber internationale 50.000 800
+danske
+4.000
+25 Elementbegreber internationale 14.500 500
+danske
+50
+5 Organisationer internationale 50 2
+danske
+10
+0 Brugsnavne internationale --- ---
+danske
+7.000
+700
+LabTerm 2 Underbilag 3.1
+Kravspecifikation v1 Side 14 af 87
+NPU-terminologien er en højt specialiseret fagterminologi og omfatter som sådan tegn, symboler og typografiske virkemidler. Den samlede terminologi er tilgængelig fra LabTerms download- side8.
+Eventuelle supplerende NPU-derivater
+NPU-terminologien i sin nuværende form omfatter ikke ekspli- citte oplysninger om gruppering af analyseresultater i forbin- delse med visning. Denne facilitet kan på nationalt niveau være ønskværdig, og Løsningen skal derfor være forberedt til at kunne understøtte, at information om gruppering af analysere- sultater kan indlæses og vedligeholdes.
+NPU - logisk model
+I forbindelse med etableringen af det eksisterende it-system for 10 år siden udformede man – med udgangspunkt i den koncep- tuelle NPU-model – en logisk model, som blev lagt til grund for udformningen af det eksisterende værktøj.
+Som beskrevet i forundersøgelsen6 har denne model i forhold til nutidige krav nogle mangler, som fortrinsvis vedrører:
+- Sondring mellem terminologiens internationale og natio- nale elementer
+- Detaljering af historikoplysninger
+- Forbedring af note-apparat
+Labterms logiske model er derfor nu revideret, med mindre æn- dringer til følge - som udtryk for, at terminologiens overordnede struktur er stabil.
+Labterms logiske model var – og er også efter revisionen - tæt knyttet til NPU-terminologiens konceptuelle model. Dette skal tages som udtryk for, at den reviderede logiske model anses som en forudsætning for at kunne it-understøtte de funktionali- teter, som vedligeholdelse af NPU-terminologien kræver. Menin- gen med at kravspecificere i forhold til en logisk model er nær- mere beskrevet i indledningen af dette kapitel.
+Den reviderede logiske model og de dertil hørende forretnings- regler er detaljeret beskrevet i selvstændigt underbilag 3.4. Mo- dellen er dokumenteret i Unified Modeling Language9 (UML), der forudsættes bekendt.
+8 LabTerms download-side: http://www.labterm.dk/Enterprise%20Portal/NPU_download.aspx
+9 Unified Modeling Language (UML): https://www.uml.org/
+LabTerm 2 Underbilag 3.1
+
+** NPU-elementers livscyklus og historik
+ NPU-terminologiens forskellige elementer har en livscyklus be- stemt ved en række tilstande, som vist på tilstandsdiagrammet Figur 5: Figur 5. Tilstandsdiagram for NPU-elementer
+ Tilstandsdiagrammet Figur 5 viser de tilstande, som et NPU-ele- ment kan gennemløbe som del af sin livscyklus. Som vist på dia- grammet kan et ufærdigt element skifte mellem flere tilstande, men når det bliver frigivet (som aktivt) kan det derfra kun skifte status til inaktivt. NPU-elementer, der er frigivet, slettes princi- pielt aldrig.
+ Skift af tilstand – status - foregår ved, at NPU-elementet tilføjes yderligere et Kontekst-objekt, som desuden indeholde oplysnin- ger om tidspunkt for beslutning og effektuering, samt den an- svarlige redaktør. Se desuden omtalen i den logiske modelbe- skrivelse, udbudsmaterialets underbilag 3.4.
+ For en række af de viste tilstande skal ethvert NPU-element bære fuld historik, og det skal altså være muligt for systemet senere at vise forløbet af elementets indhold og relationer, mens det har været i disse tilstande.
+ De historik-relevante tilstande er de på tilstandsdiagrammet far- velagte: oprettet, klar til frigivelse, aktiv og inaktiv, idet NPU- elementer i tilstanden oprettet alene bærer historik om bruger og datotid. For ufærdige elementer vedligeholdes således kun historik om oprettelsen.
+ Som del af den logiske model er anført en række logiske forret- ningsregler. Med enkelte, angivne undtagelser har disse kun virkning for NPU-elementer i status 'klar til frigivelse', 'aktiv' og 'inaktiv'.
+ LabTerm 2 Underbilag 3.1
+ Kravspecifikation v1 Side 16 af 87
+ Tilstanden klar til frigivelse udgør en skillelinje, idet der ikke fo- regår nogen form for validering af NPU-elementers indbyrdes re- lationer, så længe de er i en ufærdig tilstand, mens frigivne
+ NPU-elementer er underkaster fuld validering. Herimellem ligger tilstanden klar til frigivelse, der gør det muligt forsøgsvis og re- versibelt at undersøge konsekvensen af validering. Dette er nærmere omtalt i afsnit 4.2.1.1 om Oprettelse og redigering af NPU-elementer.
+ Nogle overordnede forretningsregler
+ Et centralt problem ved det eksisterende LabTerm-system er sammenblandingen af dansk og international terminologi – både i forhold til funktionalitet og terminologiske artefakter.
+ Dette er der med den reviderede logiske model taget hensyn til, og den efterspurgte Løsningen skal således kunne understøtte, at
+ - brugere, der er tilknyttet IRC, kan eksklusivt vedligeholde og publicere den internationale NPU-terminologi.
+ - brugere, der er tilknyttet et NRC, kan eksklusivt vedlige- holde og publicere dette releasecenters nationale NPU-de- rivater.
+ - nationale releasecentre fungerer uafhængigt af hinanden og Løsningen skal sikre, at de hverken i forhold til funk- tion eller anvendelsen af terminologiartefakter kan påvirke hinanden.
+ - nationale NPU-derivater er baseret på (læs: afhængige af) international NPU, og Løsningen skal sikre, at brugere fra det internationale releasecenter ikke uforvarende ændrer grundlaget for nationale NPU-derivater.
+ Underbilag 3.1 Kravspecifikation v1 Side 16 af 87
+* 4 FORRETNINGSMÆSSIG ANVENDELSE
+Den ønskede Løsningen udgør et værktøj til løbende redigering og publikation af international NPU. Løsningen skal desuden un- derstøtte løbende redigering og publikation af danske NPU-deri- vater.
+Det skal være muligt at udvide Løsningen til også at understøtte redigering og publikation af andre nationale NPU-derivater.
+** Roller og releasecentre
+ Løsningen leveres med funktionalitet, der understøtter to releasecentre:
+ - Internationalt releasecenter
+ - Dansk releasecenter
+ og som understøtter brugere i følgende roller:
+ - International redaktør
+ - National redaktør
+ - Registreret bruger
+ - Anonym bruger
+ - Administrator
+
+Det skal være muligt at udvide Løsningen til at understøtte yderligere nationale releasecentre. Med henblik på at understøtte det tekniske samarbejde mellem de etablerede releasecentre, skal det på sigt desuden være muligt at udvide Løsningen med virtuelle releasecentre med samme muligheder og begrænsninger som de nationale.
+
+En redaktør
+- en bruger, der kan indtræde i en redaktør-rolle - er normalt kun tilknyttet ét releasecenter. Det er dog muligt for en redaktør at være knyttet til mere end ét releasecenter, og en sådan redaktør skal kunne vælge sit 'aktuelle releasecenter' blandt de tilknyttede og derved ændre sine aktuelle rettigheder og muligheder.
+
+En redaktørs læse/skrive-adgang administreres separat for hvert releasecenter, som redaktøren er tilknyttet. Det skal således være muligt fx for en given svensk redaktør at have læseadgang, men ikke skriveadgang, til danske NPU-derivater.
+
+Flere brugere skal samtidigt kunne arbejde på Løsningen. Der forventes maksimalt følgende antal brugere:
+ Rolle Antal Antal samtidige International redaktør 5 3
+ National redaktør (ét releasecenter)
+ 5
+ 5 National redaktør (på tværs af releasecentre) 100 50
+ Registreret bruger
+ 500
+ 200 Anonym bruger --- 500
+
+**  International redaktør
+ En international redaktørs arbejde er forankret i det internationale releasecenter, og omfatter elementerne i den internationale terminologi.
+
+ Som international redaktør kan man oprette, ændre og inaktivere elementer fra den internationale NPU.
+
+**  National redaktør
+ En national redaktørs arbejde er forankret i det enkelte nationale releasecenter, og omfatter elementerne i den pågældende nationale tilpasning, herunder oversættelse og udvidelse af den internationale NPU.
+ Som national redaktør arbejder man under det nationale releasecenters licens og har derfor adgang til NPU-terminologiens baggrundsdata.
+ Som national redaktør kan man kun oprette, ændre og inaktivere elementer indenfor sit eget releasecenter. Man kan i den forbindelse se og anvende de internationale elementer som byggeklodser.
+
+**  Registreret bruger
+ En registreret bruger kan fra Løsningen (web-portalen) downloade de relevante nationale NPU-derivater.
+
+**  Anonym bruger
+ En anonym bruger kan foretage opslag og på baggrund af søgning og filtrering se og downloade udtræk.
+
+**  Administrator
+ Administrator har ansvar for oprettelse af brugere og releasecentre, for tilknytning af redaktører til releasecentre, og for vedligeholdelse af de enkelte redaktørers læse/skrive-adgang indenfor deres tilknyttede releasecentre.
+
+**  Brugerstyring
+ Løsningen skal kunne tilgåes af brugere i de nævnte roller.
+ Adgang som redaktør – uanset type - kræver 2-faktor-autentificering. Dog kræver efterfølgende skift mellem redaktørens tilknyttede releasecentre kun password. Som redaktør råder man
+ - afhængigt af individuelle rettigheder – over alle Løsningens funktionaliteter, herunder særligt muligheden for at redigere (dele af) NPU-terminologien, dvs. de funktionaliteter, der er beskrevet i afsnittene 4.2, 4.3 og 4.4.
+ Adgang som registreret bruger kræver simpel autentificering med brugernavn/password og giver adgang til download af NPUterminologi, dvs. de muligheder for download, der er beskrevet i afsnittene 4.4.2, 4.4.3 og 4.4.4.
+ Anonyme brugere er ... anonyme og har kun adgang til at fremsøge og downloade de udtræk af NPU-terminologien, der er beskrevet i afsnit 4.4.4.
+ Administrator-rollen er forankret i det internationale releasecenter, og adgang som administrator kræver separat 2-faktor-autentificering. Administrator har i et selvstændigt view (ikke nærmere beskrevet her) mulighed for at oprette, lukke og redigere adgang for redaktører og registrerede brugere samt for at tilknytte redaktører til releasecentre.
+
+** Generel funktionalitet for redaktører
+ Som beskrevet i forundersøgelsen (selvstændigt underbilag 3.5) har det internationale/danske releasecenter gennem 10 år anvendt et til formålet skræddersyet værktøj (LabTerm), som fortsat anvendes til at understøtte releasecentrets arbejdsprocesser. Det er ønsket, at Løsningen i videst muligt omfang understøtter de metoder og processer, som releasecentret har udviklet og desuden afhjælper de mangler, som er beskrevet i det indledende kapitel. Løsningen kan således funktionelt anskues som en væsentlig opdatering af det eksisterende system.
+
+ Den nedenstående funktionelle beskrivelse af Løsningen tager derfor afsæt i det eksisterende system og beskriver Løsningens funktionalitet som userstories med udgangspunkt i en række centrale views, hvor hvert view vedrører redigering af et af de centrale NPU-elementer. I det nedenstående er således beskrevet userstories med udgangspunkt i følgende views:
+ - Elementbegreb-view
+ - Organisation-view
+ - NpuBegreb-view
+ - Søgeterm-view
+ - Brugsnavn-view
+ - Terminologirelation-view
+
+ Løsningen skal desuden understøtte publikation af NPU-terminologien på måder, der nærmere er beskrevet i afsnit 4.4. Overordnet generel funktionalitet
+
+ Løsningens hovedmenu er - uanset den aktuelle arbejdsgang - altid tilgængelig. Fra hovedmenuen kan redaktøren blandt andet direkte åbne de centrale views anført i forrige afsnit.
+
+ Fra hovedmenuen kan redaktøren direkte vælge det aktuelle releasecenter (blandt de releasecentre, redaktøren har adgang til) og det aktuelle sprog (blandt de sprog, som det aktuelle releasecenter arbejder i). Når redaktøren på denne måde skifter aktuelt releasecenter/sprog, skal samtlige åbne centrale views automatisk opdatere deres indhold (gerne også deres brugergrænseflade) uden iøvrigt at ændre viewenes parametre og aktuelle konfiguration.
+
+ Al tekst i løsningen skal kunne vises formateret og al form for inddatering af tekst skal ske med en editor, som på tegn-niveau kan håndtere følgende attributter:
+ - fed
+ - understreget
+ - kursiv
+ - superscript
+ - subscript
+ og som kan håndtere de nødvendige special-tegn.
+***  4.2.1.1 Oprettelse og redigering af NPU-elementer
+  I afsnit 3.2.1 om NPU-elementers livscyklus og historik er vist tilstandsdiagrammet for NPU-elementer som Figur 5.
+  En redaktør kan i én arbejdsgang oprette et eller flere nye NPUelementer, enten som fritstående eller som kopi af eksisterende.
+  Nye NPU-elementer oprettes altid i status oprettet og der føres herudover ikke historik, før de på et tidspunkt sættes klar til frigivelse.
+  NPU-elementer i kladde kan ændres ved simpel overskrivning af indhold og relationer, og de er ikke underkastet forretningsregler udover datatypificering.
+  NPU-elementer i status klar til frigivelse kan ikke redigeres. Hvis de ønskes ændret, skal deres status skiftes til kladde. (xyz)
+  Hvis et frigivet NPU-element redigeres, skal visse ændringer udløse, at der på det (måske meget indirekte) relaterede NpuBegreb tilføjes en Versionsnote, som beskriver ændringens art. Redaktøren kan dog eksplicit fravælge at Versionsnoten tilføjes. Sammenhængen mellem ændringer og Versionsnoter er mere udførligt beskrevet i den logiske models forretningsregler, se selvstændigt underbilag 3.4.
+  Når redaktøren med ét eller flere NPU-elementer forsøger at skifte status til klar til frigivelse skal systemet tjekke forretningsreglerne. Hvis den samlede operation ikke kan gennemføres uden at bryde forretningsregler, skal ingen del af operationen gennemføres. Systemet skal da tydeligt oplyse, hvori problemet består, og hvordan det kan løses.
+***  4.2.1.2 Sprog og releasecenter
+  Løsningen skal primært understøtte arbejdet i det internationale og det danske releasecenter. På sigt skal det desuden være muligt at anvende Løsningen i andre nationale releasecentre.
+  Der kan til et releasecenter være knyttet flere sprog – fx for et finsk releasecenter både svensk og finsk. En redaktør kan skifte sit 'aktuelle sprog' blandt de sprog, der er tilknyttet det 'aktuelle releasecenter'.
+  Potentielt omfatter Løsningen brugergrænseflade på de understøttede releasecentres default-sprog. Redaktøren kan frit vælge brugergrænseflade-sprog blandt de tilgængelige.
+  Ethvert NPU-element "ejes af" (læs: kan entydigt henføres til) præcis ét releasecenter – enten specificeret i attribut eller som del af komposition. Forretningsregler sikrer, at de enkelte releasecentre ikke "går i vejen" for hinanden, men samtidigt at alle internationale NPU-elementer står til rådighed for understøttelse af de nationale releasecentre.
+  En redaktør kan skifte sit 'aktuelle releasecenter' blandt sine tilknyttede releasecentre. Uanset tilhørsforholdet har en redaktør altid læse-adgang til de internationale NPU-elementer.
+
+***  4.2.1.3 Funktionalitet knyttet til søgetermer
+  En søgeterm (klassen Soegeterm) kan være knyttet til enten Elementbegreb eller NpuBegreb. Formålet med søgetermer er at stille søgefaciliteter til rådighed, således at redaktørens søgeord kan matche systemets søgetermer.
+  Filtrering baseret på Soegeterm skal fungere således, at når man med et søgeord fremsøger NpuBegreber, skal man BÅDE finde de NpuBegreber, hvor deres Soegetermer matcher søgeordet OG de NpuBegreber, hvor søgeordet matcher Soegetermer knyttet til Elementbegreber gennem syntaxgruppe 'Komponent'.
+  Soegetermer, der er knyttet til NpuBegreber, er således mere specifikke.
+***  4.2.1.4 Batch-operationer
+  For nogle NPU-elementer er der behov for at kunne foretage operationer på flere elementer som batch – fx for en række udvalgte Elementbegreber at erstatte den ene definerende Organisation med en anden (læs: oprette en stribe afløsende DefinerendeReferencer).
+  Det realiseres ved i NPU-elementtypens centrale view at fokusere de NPU-elementer, der ønskes påvirkede, og direkte angive den ønskede type batch-operation – fx 'Skift organisation' i et Elementbegreb-view. Løsningen sætter da redaktøren i stand til at angive de for operationen nødvendige parametre og at eksekvere operationen.
+  Hvis en batch-operationen vil forbryde sig mod forretningsreglerne, skal den samlede operation bremses, og redaktøren orienteres om problemets art og mulige løsninger.
+  De understøttede batch-operationer specificeres i forbindelse med beskrivelsen af centrale views nedenfor. (xyz 2022-01-29-1735 klarheder over batchoperationer)
+***  4.2.1.5 Simpel import/eksport
+  Med henblik på at foretage batch-operationer, som ikke er understøttet af systemet, er det muligt at trække data ud til ekstern bearbejdning og efterfølgende genindlæsning.
+  Både import og eksport foregår i formatet Excel-regneark.
+  Simpel import/eksport er relateret til de centrale NPU-elementer og omtales nærmere – dels i den generelle beskrivelse af oversigtsview (afsnit 4.2.2.1) og dels i beskrivelserne af centrale views for enkelte NPU-elementer (afsnit 4.3).
+***  Generel funktionalitet vedrørende de centrale views
+  I dette afsnit beskrives en række gennemgående egenskaber ved de centrale views, som nedenfor omtales i separate afsnit.
+
+  De centrale views er hver for sig dedikeret til en bestemt type NPU-element – fx NpuBegreber i et NpuBegreb-view. De kan anvendes til at skabe overblik over forekomsten af denne slags NPU-element, til at udvælge et eller flere NPU-elementer, eller til i et egnet detailview at inspicere eller redigere et enkelt NPUelement. De centrale views skal derfor kunne referere hinanden, og Løsningen skal kunne vise flere views samtidigt som overlejrede vinduer. (xyz 2022-01-29-1737 - faneblade ?)
+
+  De centrale views kan åbnes parameterstyret, så de kun viser et filtreret udsnit, jf. den nedenstående beskrivelse af viewenes filter-sektion.
+  Alle åbne views skal have automatisk, tidstro opdatering, så evt. ændringer slår igennem overalt. (xyz 2022-01-29-1738 - akita eller websockets)
+
+  De fleste centrale views er bygget over samme skabelon med:
+  - et oversigtsview i form af en tabel, der viser en liste af NPU-elementer - fx Elementbegreber i et Elementbegrebview.
+  - en filter-sektion med inputfelter, der anvendes til at angive den ønskede filtrering af tabellens indhold - fx kun aktive Elementbegreber oprettet efter en given dato, hvor termKort indeholder strengen 'lasm'.
+  - ét eller flere detailviews, der viser egenskaber for det element, der er i fokus i oversigtsviewet - fx for et Elementbegreb vises Elementkode, molMasse, termer, status, etc.
+  - evt. en batch-sektion, med inputfelter til specifikation af batch-operationer på de i oversigten udpegede NPU-elementer.
+  Disse komponenter, som viewene består af, tilbyder en række generelle funktionaliteter, som derfor ikke beskrives særskilt for de enkelte views, men i stedet beskrives herunder:
+
+***  4.2.2.1 Oversigtsview udformet som tabel med NPU-elementer
+  Tabellen har en header, som angiver, hvad det er, der oplistes - fx 'Elementbegreb' - og angiver antallet af (filtrerede) items.
+
+  De oplistede NPU-elementers egenskaber vises i et antal kolonner. Hvilke egenskaber, der vises, og hvilken rækkefølge, de vises i, konfigureres persisterende ("sticky") af den enkelte redaktør (xyz 2022-01-29-1740 - en tabel til at gemme det). De egenskaber, der kan indgå i viewets kolonner, specificeres i beskrivelsen af det enkelte view. Der kan ved klik på kolonneoverskriften sorteres på enhver kolonne, uanset om indholdet er numerisk, tekstuelt eller binært. Kolonners bredde kan frit ændres af redaktøren.
+
+  Tabellens rækker vises farvekodet efter NPU-elementets status (sidste associerede Kontekst.statusType), så der tydeligt ses forskel på items, der er kladde, klar til frigivelse, aktiv og inaktiv.
+
+  Det er muligt at udpege én eller flere rækker i tabellen, og derved fokusere et antal NPU-elementer med henblik på eksport, batch-operation og lignende. Hvis kun ét NPU-element er i fokus, vises dette elements egenskaber i detailviews (beskrevet nedenfor).
+
+  Det er muligt direkte fra oversigtsviewet at oprette et antal kopier af et udpeget NPU-element. Redaktøren skal direkte kunne angive det ønskede antal kopier.
+
+  Det er for alle centrale NPU-elementer muligt direkte fra oversigtsviewet at eksportere oplysninger om de fokuserede NPUelementer til et regneark med henblik på ekstern databehandling. Det, der således eksporteres, er ikke blot indholdet af de viste kolonner, men desuden de fokuserede NPUelementers eventuelt ikke-viste attributter. Kolonneoverskrifter kopieres altid med som første række.
+
+  Det er – for de fleste centrale NPU-elementer - muligt direkte fra oversigtsviewet at importere oplysninger fra et regneark. Kolonneoverskrifter skal altid udgøre regnearkets første linje. Der er ikke krav til kolonnernes rækkefølge, men der er – afhængigt af NPU-elementets art - forskellige krav til, hvilke kolonner, der kræves for at gennemføre importen. Alle NPU-elementer, der direkte eller indirekte er en konsekvens af importen, optræder i status oprettet.
+
+  Hvis en import direkte eller indirekte vedrører eksisterende NPUelementer i status kladde, bliver disse overskrevet med importens data.
+
+  Hvis en import vil forbryde sig mod forretningsreglerne – fx ved at referere til ikke-eksisterende elementer eller ved oprettelse af ulovlige dubletter, skal den samlede import bremses, og redaktøren orienteres om problemets art og mulige løsninger.
+
+  Det er muligt direkte fra oversigtsviewet at udføre batch-operationer på de fokuserede NPU-elementer. De specialiserede batch-operationer er beskrevet i forbindelse med de enkelte centrale views, mens der fra ethvert oversigtsview kan udføres disse batch-operationer:
+
+  - Fælles statusskift: Et antal NPU-elementer kan - under iagttagelse af forretningsregler og tilladte statusskift - sættes i en angivet status.
+
+  Hvis gensidig afhængighed påbyder, at disse statusskift skal ske i en bestemt rækkefølge, skal Løsningen tage hensyn hertil.
+
+  Hvis disse statusskift direkte eller indirekte får konsekvens for allerede frigivne NPU-elementer, skal redaktøren advares herom, inden operationen gennemføres.
+
+  - Fælles annotation: Et antal NPU-elementer kan synkront annoteres med en fælles Note.
+***  4.2.2.2 Filtersektion, der begrænser visning af NPU-elementer
+  Filtersektionen indeholder en række inputfelter, som redaktøren anvender til at specificere den ønskede filtrering.
+
+  Filtreringen vedrører alle det centrale views komponenter – altså både oversigts- og detailviews.
+
+  De centrale views kan kaldes parameterstyret, hvorved de åbner med de tilførte parametre angivet i filtersektionens felter.
+
+  Filtrering skal overalt hvor muligt også omfatte negation/NULLfiltrering, fx:
+  - Soegetermer, som IKKE er tilknyttet et givet Elementbegreb
+  - Organisationer, som IKKE indgår i definition af Elementbegreb OG IKKE er godkender af Brugsnavn
+  - Elementbegreber, som IKKE indgår i definition af NpuBegreb
+
+  Følgende filtre har generaliseret funktionalitet:
+  - der anvendes fortrinsvis drop-downs til at filtrere på klassificerede udfaldsrum, som fx sprog og statusType
+  - tekstuelle filtre fungerer med implicitte wildcards både før og efter. Således vil filtrering på 'plas' finde både 'plasma' og 'toksoplasmose'.
+  - filtrering på datotid sker altid med et trefløjet felt til angivelse af
+  + situation med udfaldsrummet: [oprettet | klar til frigivelse | aktiv | inaktiv] – alle anskuet vha. Kontekst.medVirkningFra
+  + relation med udfaldsrummet [før | fra eller senere]
+  + reference (angivet datotid, gerne som kalender-udpegning)
+
+***  4.2.2.3 Detailviews, der viser et NPU-element
+  Som del af de centrale views kan der – foruden oversigtstabellen og filtersektionen – være et antal detailviews. De mest anvendte detailviews er beskrevet i dette afsnit.
+
+  Et detailview har - uanset type - altid en header, som gør det klart, hvilket NPU-elements detaljer, viewet viser. Det angives for de enkelte centrale views, hvad denne header skal indeholde.
+
+  Detailviews er farvelagt på samme måde som i oversigtsviewet, så man altid er opmærksom på det viste NPU-elements aktuelle status.
+
+  Hvis der ikke entydigt er et NPU-element i fokus, vises intet indhold i de almindelige detailviews.
+
+  Detailviewet 'Egenskaber' gør det muligt at se og evt. redigere NPU-elementets attributter og relationer. Egenskabs-detailviewet består således i udgangspunktet af en række felter til inddatering. Felterne er i udgangspunktet alle read-only.
+
+  Det er direkte fra detailviewet muligt for en redaktør med tilstrækkelig rettighed at "oprette nyt NPU-element" - evt som kopi af eksisterende - hvorved alle redigerbare inputfelter overgår i read/write og viewets header og baggrundsfarve udtrykker, at redaktøren nu arbejder i kladdeland.
+
+  Det er direkte fra detailviewet muligt for en redaktør med tilstrækkelig rettighed at redigere et aktivt NPU-elementet, hvorved alle redigerbare inputfelter overgår i read/write og viewets header og baggrundsfarve udtrykker, at redaktøren nu arbejder i kladdeland. Systemet sikrer, at det redigerede NPU-element afløser det tidligere på en konsistent måde og – ved behov - at der på konsistent måde dannes Versionsnoter, som redaktøren evt. kan fravælge, jf. beskrivelsen af redigering i afsnit 4.2.1.1.
+
+  Detailviewet 'Historik' viser for det givne NPU-element dets kronologiske statusskift og noter. Historik-detailviewet består for alle NPU-elementer af en tabel, med kolonner specificeret for den enkelte type NPU-element, dog altid med
+  - første kolonne er datotid (sorterbar, default sidste øverst)
+  - der optræder altid en kolonne med Kontekst.statusType
+  - der optræder altid en kolonne med Kontekst.bruger
+  - sidste kolonne angiver en evt. Note.tekst Detailviewet 'Mapping' gør det muligt at se og evt. redigere
+  NPU-elementets mappinger til eksterne terminologier. Mappingdetailviewet anvendes kun i forbindelse med Elementbegreber og NpuBegreber.
+
+  Mapping-detailviewet består af to dele – en tabel og en redigeringssektion. Det er muligt både fra tabellen og redigeringssektionen at åbne Terminologirelation-viewet filtreret på det aktuelle NPU-element.
+  Tabellen viser alle NPU-elementets aktive mappinger for aktuelle releasecenter – dvs. releasecentrets aktive, associerede Terminologirelationer - udtrykt ved kolonnerne:
+  - terminologiens navn
+  - relationstype
+  - målbegrebets id (= Terminologirelation.begreb)
+  Det er i tabellen muligt at fokusere en eksisterende mapping og inaktivere den eller sende den til inspektion/redigering i redigeringssektionen. Det er desuden muligt at oprette en ny mapping.
+  Redigeringssektionen gør det muligt at se og evt. redigere en Terminologirelation associeret til det aktuelle NPU-element.
+  Dette omfatter felterne:
+  - Terminologirelation.terminologi
+  - Terminologirelation.begreb
+  - Terminologirelation.maalbegrebEr
+  - Terminologirelations sidste Kontekst.statusType (Ved redigering mulighed for ny Kontekst)
+  - Terminologirelations sidste Kontekst.medVirkningFra (Ved redigering mulighed for ny Kontekst)
+  - Terminologirelations sidste Note.tekst (Ved redigering mulighed for ny Note)
+  Funktionalitet vedrørende de centrale views
+  Løsningens funktionalitet er nedenstående beskrevet som userstories med udgangspunkt i en række centrale views, hvor hvert view vedrører redigering af et af de centrale NPU-elementer.
+  Leverandøren skal fremlægge en plan for, hvordan man vil inddrage brugere i udformningen af views.
+**** Elementbegreb-view med userstories
+   Elementbegreb-viewet består – jvf. afsnit 4.2.2 af:
+   - et oversigtsview i form af en tabel, der viser en liste med Elementbegreber
+   - en filter-sektion med inputfelter
+   - tre overlappende detailviews (fx som faneblade), der for det fokuserede Elementbegreb viser henholdsvis egenskaber, historik og mapping.
+
+   Elementbegreb-viewet stiller desuden en batch-sektion til rådighed for de nedennævnte batch-operationer.
+   Header for detailviews skal vise Elementbegrebets elementkode og aktuelle lange term på releasecentrets default-sprog. Hvis termen ændres som konsekvens af brugerens anvendelse af viewet, skal headeren straks opdatere.
+*****    Oversigtsview med Elementbegreber
+    Tabellen tilbyder de generelle funktionaliteter, der er beskrevet i afsnit 4.2.2. Den har flg. kolonner med attributter fra Elementbegreb og associerede klasser:
+    - elementkode
+    - Elementterm.termLang
+    - DefinerendeReference.definerendeIdHosOrg
+    - Organisation.kortNavn (via DefinerendeReference), udformet som link til Organisation-view (xyz)
+    - DefinerendeReference.definerendeTekst
+    - oprettet tidspunkt = første Kontekst.medVirkningFra
+    - aktuelle status = sidste Kontekst.statusType
+    - status opnået = sidste Kontekst.medVirkningFra
+    - sidst tilknyttede note (evt. som link)
+
+    Med henblik på at udføre batch-operationer på fokuserede Elementbegreber er det direkte fra oversigts-viewet muligt at initiere de følgende operationer:
+
+    - Batch-redigering af Elementbegreb-indhold: Det skal være muligt at angive definerende Organisation (via DefinerendeReference) med indsættelse af angiven DefinerendeReference.definerendeTekst
+*****     Filtersektion for Elementbegreber
+    Filtersektionen består af to grupper - Term og Begreb - med inputfelter til filtrering på flg. attributter fra Elementbegreb og associerede klasser:
+    - Term:
+    + Elementterm.sprog
+    + Elementterm.termLang
+    + Elementterm.termKort
+    + Elementterm.releaseCenter
+    + Soegeterm.term (via ElementSoegeterm)
+    - Begreb:
+    + elementkode
+    + DefinerendeReference.definerendeTekst
+    + DefinerendeReference.definerendeIdHosOrg
+    + Organisation.kortNavn (via DefinerendeReference)
+    + NpuBegreb.npuKode (via ElementbegrebListe)
+    + Terminologirelation.terminologi
+    + Kontekst.statusType
+    + Kontekst.bruger
+    + datotid (som beskrevet i afsnit 4.2.2.2)
+*****     Detailview med egenskaber for Elementbegrebet i fokus
+    I egenskabs-detailviewet stilles de nedennævnte oplysninger til rådighed for visning og redigering.
+    Bemærk, at dette view har speciel funktionalitet i forhold til visning af Elementtermer, idet redaktøren – med henblik på konsistent oversættelse - skal kunne se alle Elementtermer uanset releasecenter. Redaktørens rettigheder med hensyn til redigering er dog ikke ændrede.
+    - elementKode (kun visning)
+    - Associerede aktive Elementtermer fra alle releasecentre. Ved redigering desuden link med mulighed for at oprette ny Elementterm og for at inaktivere en eksisterende Elementterm. Hver Elementterm angives med attributterne:
+    + termLang
+    + termKort
+    + sprog
+    + releasecenter
+    - Associerede DefinerendeReference med
+    + definerendeIdHosOrg - eller - definerendeTekst
+    + Organisation.kortNavn (via DefinerendeReference), udformet som link til Organisation-view filtreret på fokuserede Elementbegreb
+    - molmasse
+    - Link til Søgeterm-view filtreret på det fokuserede Elementbegreb. Desuden associerede Soegetermer, hver med
+    + term
+    + sprog
+    - Link til Terminologirelation-view filtreret på det fokuserede Elementbegreb
+    - Sidste Kontekst.statusType
+    (Ved redigering mulighed for ny Kontekst)
+    - Sidste Kontekst.medVirkningFra
+    (Ved redigering mulighed for ny Kontekst)
+    - Sidste Note.tekst
+    (Ved redigering mulighed for ny Note)
+*****     Detailview med historik for Elementbegrebet i fokus
+    Dette detailview er bygget som beskrevet i afsnit 4.2.2, og viser for Elementbegrebet i fokus dets kronologiske statusskift og noter i en tabel med flg. kolonner:
+    - datotid (default sidste øverst)
+    - Elementterm.termKort for AktuelleReleasecenter og AktuelleSprog
+    - Elementterm.termLang for AktuelleReleasecenter og AktuelleSprog
+    - molMasse
+    - DefinerendeReference.definerendeIdHosOrg eller DefinerendeReference.definerendeTekst
+    - Organisation.kortNavn (via DefinerendeReference, link til filtreret Organisation-view)
+    - Kontekst.statusType
+    - Kontekst.bruger
+    - Note.tekst
+
+    Mapping-detailview
+    Dette detailview, som viser det fokuserede Elementbegrebs mapping til eksterne terminologier, er bygget fuldstændigt som beskrevet i afsnit 4.2.2.3.
+*****     4.3.1.1 Userstories vedrørende Elementbegreb-view
+    Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger>
+    A redaktør
+overblik over Ele- mentbegreber åbne Elementbegreb-view, hvor man med filtrering/søgning på mange for- skellige samtidige egenskaber kan fo- kusere Elementbegreber af interesse. Man kan udpege et enkelt Elementbe- greb og i detailview se dets detaljer og historik.
+    B redaktør
+    at oprette et nyt frit Elementbe- greb
+    enten fra nyt eller som en kopi af et fo- kuseret Elementbegreb. Man kan i egenskabs-detailviewet direkte redigere det nye Elementbegrebs definition (De- finerendeReference), termer (Element- termer) og indhold. C redaktør oprette multiple kopier af et Ele- mentbegreb for siden at udnytte deres indbyrdes lighed man kan direkte fra oversigtsviewet op- rette et specificeret antal kopier, som man bagefter kan rette til med indivi- duelle ændringer eller eksportere til et regneark.
+    D redaktør
+    redigere et Ele- mentbegreb
+    fokusere Elementbegrebet og i egen- skabs-detailviewet ændre dets defini- tion (DefinerendeReference), termer (Elementtermer) og indhold. Systemet hjælper mig med at sikre, at det redi- gerede Elementbegreb afløser det tidli- gere på en konsistent måde og at der på konsistent måde dannes Versionsno- ter, som man evt. kan fravælge. F redaktør (som led i indda- tering eller revi- sion af Element- begreb) angive en definerende- Tekst I egenskabs-detailviewet, hvor man har adgang til at inddatere DefinerendeRe- ference.definerendeTekst kan man vælge mellem at inddatere fritekst, el- ler vælge blandt en række tekstskabe- loner med mulighed for substitution med termLang.
+    Underbilag 3.1 Kravspecifikation v1 Side 31 af 87
+    G
+    redaktør
+    styre det fokuse- rede Elementbe- grebs mapping til andre terminolo- gier
+    fokusere Elementbegrebet og i map- ping-detailviewet se oversigten over dets eksisterende mappinger. Man kan direkte oprette nye mappinger og redi- gere de eksisterende. H redaktør se detaljer om den relaterede Organisation man kan vælge enten fra en linje i oversigtsviewet eller fra egenskabs-de- tailviewet at følge et link, der åbner et Organisation-view hvor det aktuelle Elementbegreb er anvendt som filter.
+    J
+    redaktør
+    at få overblik over de relate- rede NpuBegre- ber
+    man kan vælge enten fra en linje i oversigtsviewet eller fra egenskabs-de- tailviewet at følge et link, der åbner et NpuBegreb-view, hvor det aktuelle Ele- mentbegreb er anvendt som filter. K redaktør at få overblik over de relate- rede søgeord man kan vælge enten fra en linje i oversigtsviewet eller fra egenskabs-de- tailviewet at følge et link, der åbner et Søgeterm-view, hvor det aktuelle Ele- mentbegreb er anvendt som filter.
+    L
+    redaktør
+    kontrollere om Elementbegreber i kladde kan frigi- ves
+    fokusere dem i oversigtsviewet og sam- let forsøge at sætte dem i status klar til frigivelse. Hvis man derved bryder for- retningsregler, giver systemet mig en udførlig beskrivelse af problemet og hjælp til at rette fejlene.
+    Hvis statusskiftet lykkedes kan man umiddelbart og samlet skifte status til- bage til kladde. M redaktør eksportere Ele- mentbegreber med tilhørende Elementtermer og DefinerendeRefe- rencer til et reg- neark direkte fra oversigtsviewet ud- pege/fremsøge Elementbegreber til ek- sport. Systemet lader mig bestemme, hvor man vil placere det resulterende regneark. Regnearket har et format, så det er klar til efterfølgende import.
+    N
+    redaktør
+    importere Ele- mentbegreber med tilhørende Elementtermer og DefinerendeRefe- rencer fra et reg- neark
+    fremstille et regneark med kolonner, der indeholder de ønskede data, og di- rekte fra Elementbegreb-viewet bestille import. Systemet beder mig udpege import-filen, og hvis importen gennem- føres, kan man straks i oversigtsviewet se de nye Elementbegreber. Hvis im- porten vil bryde angivne forretnings- regler, annulleres den samlede import, og man orienteres om problemets art og mulige løsninger.
+**** Organisation-view med userstories
+   Organisation-viewet består – jvf. afsnit 4.2.2 - af:
+   - et oversigtsview i form af en tabel, der viser en liste med Organisationer
+   - en filter-sektion med inputfelter
+   - to overlappende detailviews (fx som faneblade), der for den fokuserede Organisation viser henholdsvis egenska- ber og historik.
+   Header for detailviews skal vise Organisationens kortNavn efterfulgt af Organisationens navn.
+   Oversigtsview med Organisationer
+   Tabellen tilbyder de generelle funktionaliteter, som er beskrevet i afsnit 4.2.2. Den har flg. kolonner med attributter fra Organisa- tion og associerede klasser:
+   - kortNavn
+   - navn
+   - link
+   - Sidste Kontekst.statusType
+   - datotid oprettet
+   - datotid sidste statusskift
+   - sidst tilknyttede note (evt. som link)
+   Det er muligt direkte fra oversigtsviewet at importere Organisa- tioner fra et regneark, jf. beskrivelsen af simpel import i afsnit
+   4.2.2.1. Følgende kolonner er obligatoriske:
+   - Organisation.kortNavn
+   - Organisation.navn
+   Filtersektion for Organisationer
+   Filtersektionen indeholder inputfelter til filtrering på flg. attribut- ter fra Organisation og associerede klasser:
+   - kortNavn
+   - navn
+   - releasecenter
+   - DefinerendeReference.definerendeTekst
+   - Elementbegreb.elementKode (via DefinerendeReference)
+   - Brugsnavn.term
+   - NpuBegreb.npuKode (via Brugsnavn)
+   Underbilag 3.1 Kravspecifikation v1 Side 33 af 87
+   - Kontekst.statusType
+   - Kontekst.bruger
+   - datotid (som beskrevet i afsnit 4.2.2.2)
+   Detailview med egenskaber for Organisation i fokus
+   I egenskabs-detailviewet stilles flg. oplysninger til rådighed for visning og redigering:
+   - kortNavn
+   - navn
+   - beskrivelse
+   - link
+   - kontaktNavn
+   - kontaktMail
+   - releasecenter (kun visning)
+   - Sidste Kontekst.statusType
+   (Ved redigering mulighed for ny Kontekst)
+   - Sidste Kontekst.medVirkningFra
+   (Ved redigering mulighed for ny Kontekst)
+   - Sidste Note.tekst
+   (Ved redigering mulighed for ny Note)
+   Detailview med historik for Organisation i fokus
+   Dette detailview er bygget som beskrevet i afsnit 4.2.2, og viser for Organisationer i fokus dets kronologiske statusskift og noter i en tabel med flg. kolonner:
+   - datotid (default sidste øverst)
+   - kortNavn
+   - navn
+   - beskrivelse
+   - link
+   - kontaktNavn
+   - kontaktMail
+   - Kontekst.statusType
+   - Kontekst.bruger
+   Underbilag 3.1 Kravspecifikation v1 Side 34 af 87
+   - Note.tekst
+   4.3.2.1 Userstories vedrørende Organisation-view
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> A redaktør overblik over alle organisationer re- gistreret i syste- met åbne Organisation-view, hvor man med filtrering/søgning på mange forskellige samtidige egenskaber kan fokusere Or- ganisationer af interesse. Man kan ud- pege en enkelt Organisation og i detail- view se dens detaljer og historik.
+   B
+   redaktør
+   oprette eller redi- gere organisa-
+   tion ejet af mit releasecenter
+   i detailbilledet kan man – jf. afsnit
+   4.2.2.3 - umiddelbart redigere eller ny- oprette Organisation ejet af mit relea- secenter C redaktør inaktivere orga- nisation(er) ejet af mit release- center I oversigtsviewet kan man markere én eller flere organisationer til inaktive- ring. I detailviewet kan man skifte status for den fokuserede Organisation. Under alle omstændigheder forhindres man, hvis de berørte organisationer er associeret til aktive Elementbegreber eller Brugsnavne.
+   D
+   redaktør
+   overblik over de Elementbe- greber, der er
+   knyttet til en Or- ganisation
+   For Organisationen i fokus er det umid- delbart muligt med Organisationen som filtrering at åbne Elementbegreb- view. E redaktør overblik over de Brugsnavne, der er knyttet til en Organisation For Organisationen i fokus er det umid- delbart muligt med Organisationen som filtrering at åbne Brugsnavn-view.
+   F
+   redaktør
+   eksportere Orga- nisationer til et regneark
+   direkte fra oversigsviewet ud- pege/fremsøge Organisationer til ek- sport. Systemet lader mig bestemme, hvor man vil placere det resulterende
+   regneark. Regnearket har et format, så det er klar til efterfølgende import. G redaktør importere Orga- nisationer fra et regneark fremstille et regneark med kolonner, der beskriver de ønskede Organisatio- ner, og direkte fra Organisation-viewet bestille import. Systemet beder mig udpege import-filen, og hvis importen gennemføres, kan man straks i over- sigtsviewet se de nye Organisationer.
+   H
+   redaktør
+   kontrollere om Organisationer i kladde kan frigi- ves
+   fokusere dem i oversigtsviewet og samlet forsøge at sætte dem i status klar til frigivelse. Hvis man derved bry- der forretningsregler, giver systemet mig en udførlig beskrivelse af proble- met og hjælp til at rette fejlene.
+   Hvis statusskiftet lykkedes kan man umiddelbart og samlet skifte status til- bage til kladde.
+   Underbilag 3.1 Kravspecifikation v1 Side 35 af 87
+   NpuBegreb-view med userstories
+   NpuBegreb-viewet består – jvf. afsnit 4.2.2 - af:
+   - et oversigtsview i form af en tabel, der viser en liste med NpuBegreber
+   - en filter-sektion med inputfelter
+   - en række overlappende detailviews (fx som faneblade), der omhandler forskellige aspekter for det fokuserede NpuBegreb
+   NpuBegreb-viewet stiller desuden en batch-sektion til rådighed for de nedennævnte batch-operationer.
+   Header for detailviews skal – medmindre andet er angivet - vise NpuBegrebets kode og dets Lang helterm på aktuelle release- centers default-sprog.
+   Oversigtsview med NpUBegreber
+   Tabellen tilbyder de generelle funktionaliteter, som er beskrevet i afsnit 4.2.2. Som default vises NpuBegreb som flg. kolonner med attributter fra NpuBegreb og associerede klasser:
+   - npuKode
+   - NpuBegrebets Kort helterm
+   - "ErGruppe" i betydningen, at NpuBegrebet indtager posi- tion 0 i en NpuGruppeListe, afbildet som ikon (link til NPU- gruppe-detailviewet).
+   - Sidst tilknyttede versionsnote
+   - Sidste Kontekst.statusType
+   Med henblik på at udføre batch-operationer på fokuserede Npu- Begreber er det direkte fra oversigts-viewet muligt at initiere de følgende operationer:
+   - Batch-redigering af syntax: Det er muligt ...
+   o i en Syntaxgruppe af valgt type at udskifte Elementbe- grebet på en angivet position i rækkefølgen med et an- givet Elementbegreb.
+   o i en Syntaxgruppe af angivet type at tilføje et angivet Elementbegreb på en angiven position i rækkefølgen.
+   Underbilag 3.1 Kravspecifikation v1 Side 36 af 87
+   o i en Syntaxgruppe af angivet type at fjerne Elementbe- grebet på en angiven position i rækkefølgen.
+   - Batch-redigering af NpuBegreb-indhold: Det skal være muligt:
+   o at angive vaerdiskalaType
+   o at angive specialeType
+   o at angive kontekstBestemt
+   Filtersektion for NpuBegreber
+   Filtersektionen indeholder inputfelter til filtrering på flg. attribut- ter fra NpuBegreb og associerede klasser:
+   - Generelle kriterier
+   o releaseCenter (blandt dem, som redaktøren har adgang til)
+   o sprog (blandt dem, som er anvendt af valgte release- Center)
+   o npuKode
+   o specialeType
+   o "ErGruppe" i betydningen, at NpuBegrebet indtager po- sition 0 i en NpuGruppeListe, afbildet som ikon (link til NPU-gruppe-detailviewet).
+   - Term-filtrering (for specificeret releaseCenter og sprog) med fire separate filtre:
+   o termLang (via Elementbegreb) for Elementbegreb asso- cieret til Syntaxgruppe('System')
+   o termLang (via Elementbegreb) for Elementbegreb asso- cieret til Syntaxgruppe('Komponent')
+   o termLang (via Elementbegreb) for Elementbegreb asso- cieret til Syntaxgruppe('Egenskabsart')
+   o termLang (via Elementbegreb) for Elementbegreb asso- cieret til Syntaxgruppe('Enhed')
+   - Søgetermer
+   o term
+   - Brugsnavne
+   o term
+   o Organisation.kortNavn
+   Underbilag 3.1 Kravspecifikation v1 Side 37 af 87
+   - Terminologi-mapping
+   o Terminologirelation.terminologi
+   - Administrative kriterier
+   o Kontekst.statusType
+   o Kontekst.bruger
+   o datotid (som beskrevet i afsnit 4.2.2.2)
+   Detailview med egenskaber for NpuBegreb i fokus
+   I egenskabs-detailviewet stilles flg. oplysninger til rådighed for visning og redigering:
+   - npuKode (kun visning)
+   - NpuBegrebets Lang helterm udformet som link til Syntax- detailview (beskrevet senere)
+   - "ErGruppe" i betydningen at NpuBegrebet indtager posi- tion 0 i en NpuGruppeListe, vist som ikon (link til NPU- gruppe-detailviewet). Kun visning.
+   - kontekstBestemt
+   - Sidst tilknyttede versionsnote
+   - specialeType
+   - vaerdiskalaType
+   - Link til Brugsnavn-view med filtrering på det fokuserede NpuBegreb. Desuden associerede Brugsnavne, hver med
+   o term
+   o sprog
+   - Link til Søgeterm-view filtreret på det fokuserede Npu- Begreb. Desuden associerede Soegetermer, hver med
+   o term
+   o sprog
+   - Link til Terminologirelation-view filtreret på det fokuse- rede NpuBegreb
+   - erErstatningFor (npuKode, kun visning)
+   - Erstatter (npuKode, kun redigerbar ved nyoprettelse)
+   - Sidste Kontekst.statusType
+   (Ved redigering mulighed for ny Kontekst)
+   Underbilag 3.1 Kravspecifikation v1 Side 38 af 87
+   - Sidste Kontekst.medVirkningFra
+   (Ved redigering mulighed for ny Kontekst)
+   - Sidste Note.tekst
+   (Ved redigering mulighed for ny Note)
+   Detailview med historik for NpuBegreb i fokus
+   Dette detailview er bygget som beskrevet i afsnit 4.2.2, og viser
+   – anskuet for aktuelle releasecenter - for NpuBegrebet i fokus dets kronologiske statusskift og noter i en tabel med flg. kolon- ner:
+   - datotid (default sidste øverst)
+   - NpuBegrebets Lang helterm for aktuelle sprog
+   - specialeType
+   - vaerdiskalaType
+   - kontekstBestemt
+   - Versionsnote.tekst
+   - Link til Brugsnavn-view med filtrering på det fokuserede NpuBegreb. Desuden associerede Brugsnavne, hver med
+   o term
+   o sprog
+   - Link til Søgeterm-view filtreret på fokuserede NpuBegreb.
+   Desuden associerede Soegetermer, hver med
+   o term
+   o sprog
+   - Link til Terminologirelation-view med filtrering på det fo- kuserede NpuBegreb. Desuden associerede Terminologire- lationer, hver med
+   o terminologi
+   o relationstype
+   - erErstatningFor (npuKode, kun visning)
+   - Erstatter (npuKode, kun redigerbar ved nyoprettelse)
+   - Kontekst.statusType
+   - Kontekst.bruger
+   - Note.tekst
+   Underbilag 3.1 Kravspecifikation v1 Side 39 af 87
+   NpuBegreb-viewet omfatter desuden to specialiserede detail- views med funktionalitet, der ikke er beskrevet i afsnit 4.2.2 om generel funktionalitet. Det drejer sig om følgende views, som beskrives nedenstående:
+   - Lookalike-detailview
+   - Syntax-detailview
+   - NPU-gruppe-detailview
+   Lookalike-detailview
+   Dette view er beregnet på at kunne læse korrektur på et Npu- Begreb i forhold til visning i web-portalen. Lookalike-detailviewet har således som eneste funktion at fremvise det fokuserede NpuBegreb på samme måde, som det fremstår, når det af den anonyme bruger er fremsøgt i web-portalen, jf. afsnit 4.4.3.
+   Syntax-detailview
+   Dette view er beregnet på at kunne redigere det fokuserede NpuBegrebs definition, som den fremkommer gennem rækkeføl- gen af associerede Syntaxgrupper og deres associerede Ele- mentbegreber.
+   Viewet omfatter fire faste inputsektioner i syntax-rækkefølgen: system, komponent, egenskabsart og enhed (se evt Figur 1).
+   Desuden en dynamisk, tidstro visning af den Lang helterm, som er resultanten af inputsektionernes aktuelle indhold.
+   De fire inputsektioner, der hver repræsenterer en Syntaxgruppe, vises på samme måde, og har samme type funktionalitet:
+   - Inputsektionen omfatter en tabel, som for indholdet af Syntaxgruppen i rækkefølge fremviser de associerede Ele- mentbegreber repræsenteret ved:
+   o elementKode (udformet som link til Elementbegreb- view med filtrering på denne elementKode)
+   o Elementterm.termLang (på aktuelle sprog)
+   o Organisation.kortNavn (via DefinerendeReference)
+   o DefinerendeReference.definerendeIdHosOrg eller -.defi- nerendeTekst
+   - Inputsektionen omfatter en pick-list, som gør det muligt at associere endnu et Elementbegreb til Syntaxgruppen.
+   Underbilag 3.1 Kravspecifikation v1 Side 40 af 87
+   - Inputsektionen omfatter funktionalitet, som gør det muligt at udpege et Elementbegreb på listen (læs: et til den ak- tuelle Syntaxgruppe associeret Elementbegreb) og ændre dets position på listen, herunder fjerne det fra listen.
+   NPU-gruppe-detailview
+   Dette detailview er beregnet på at man kan se og redigere det fokuserede NpuBegrebs forhold til NPU-grupper, jf. Figur 2.
+   Viewet er tilgængeligt betinget af, hvordan det fokuserede Npu- Begreb indgår i NPU-grupper:
+   - Hvis det fokuserede NpuBegreb er overskrift for en NPU- gruppe (læs: står først på NpuGruppeListen) eller ikke er del af en NPU-gruppe, omfatter viewet:
+   o en tabel med overskriften: "Gruppen indeholder" og med gruppens øvrige NpuBegreber listet i rækkefølge. NpuBegreberne er i tabellen givet ved deres npuKode og Lang helterm.
+   o en pick-list, som gør det muligt at tilføje yderligere NpuBegreber til gruppen
+   o funktionalitet, som gør det muligt at udpege et Npu- Begreb på listen og ændre dets position, herunder fjerne det fra listen.
+   - Hvis det fokuserede NpuBegreb indgår som "menig" del af NPU-grupper, omfatter viewet en lignende tabel, men med overskriften: "Indgår i disse grupper" og med grup- perne oplistet.
+   Mapping-detailview
+   Dette detailview, som viser det fokuserede Elementbegrebs mapping til eksterne terminologier, er bygget fuldstændigt som beskrevet i afsnit 4.2.2.3.
+   Underbilag 3.1 Kravspecifikation v1 Side 41 af 87
+****    4.3.3.1 Userstories vedrørende NpuBegreb-view
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> A redaktør overblik over NpuBegreber åbne NpuBegreb-view, hvor man med filtrering/søgning på mange forskellige samtidige egenskaber kan fokusere NpuBegreber af interesse. Man kan ud- pege et enkelt NpuBegreb og i detail- view se dets detaljer og historik.
+   B
+   redaktør
+   at oprette et nyt NpuBegreb
+   fra oversigtsviewet at oprette Npu- Begrebet enten med "Opret ny" eller med "Opret kopi" som kopi af det foku- serede NpuBegreb. Man kan i egen- skabs-detailviewet direkte redigere det nye NpuBegrebs definition (associerede Syntaxgrupper og Elementbegreber), Søgetermer, Brugsnavne og indhold. C redaktør oprette multiple kopier af et Npu- Begreb for siden at udnytte deres indbyrdes lighed man kan direkte fra oversigtsviewet op- rette et specificeret antal kopier, som man bagefter kan rette til med indivi- duelle ændringer.
+   D
+   redaktør
+   redigere et Npu- Begreb
+   fokusere NpuBegrebet og i egenskabs- detailviewet ændre dets definition (as- socierede Syntaxgrupper og Element- begreber), Søgetermer, Brugsnavne og indhold.
+   Systemet hjælper mig med at sikre, at det redgerede NpuBegreb afløser det tidligere på en konsistent måde og at der på konsistent måde dannes Versi- onsnoter, som man evt. kan fravælge. F redaktør kontrollere om NpuBegreber i kladde kan frigi- ves fokusere dem i oversigtsviewet og sam- let forsøge at sætte dem i status klar til frigivelse. Hvis man derved bryder for- retningsregler, giver systemet mig en udførlig beskrivelse af problemet og hjælp til at rette fejlene. Hvis statusskiftet lykkedes kan man umiddelbart og samlet skifte status til- bage til kladde.
+   G
+   redaktør
+   styre det fokuse- rede NpuBegrebs mapping til andre terminologier
+   fokusere NpuBegrebet og i mapping- detailviewet se oversigten over dets ek- sisterende mappinger. Man kan direkte oprette nye mappinger og redigere de eksisterende. H redaktør at få overblik over de relate- rede Elementbe- greber man kan vælge enten fra en linje i oversigtsviewet eller fra egenskabs-de- tailviewet at følge et link, der åbner et Elementbegreb-view, hvor det aktuelle NpuBegreb er anvendt som filter.
+   J
+   redaktør
+   at få overblik over de relate- rede søgeord
+   man kan vælge enten fra en linje i oversigtsviewet eller fra egenskabs-de- tailviewet at følge et link, der åbner et Søgeterm-view, hvor det aktuelle Npu- Begreb er anvendt som filter.
+   Underbilag 3.1 Kravspecifikation v1 Side 42 af 87
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> K redaktør eksportere Npu- Begreber til et regneark direkte fra oversigtsviewet udpe- ge/fremsøge NpuBegreber til eksport. Systemet lader mig bestemme, hvor man vil placere det resulterende regne- ark.
+   Søgeterm-view med userstories
+   Søgeterm-viewet består – jvf. afsnit 4.2.2 - af:
+   - et oversigtsview i form af en tabel, der viser en liste med Søgetermer
+   - en filter-sektion med inputfelter
+   - et detailview (fx som faneblad), der for den fokuserede Søgeterm viser egenskaber.
+   Header for detailviews skal vise Søgetermen på aktuelle release- centers default-sprog.
+   Oversigtsview med Søgetermer
+   Tabellen tilbyder de generelle funktionaliteter, der er beskrevet i afsnit 4.2.2. Den har flg. kolonner med attributter fra Soegeterm og associerede klasser:
+   - term
+   - sprog
+   - type associeret klasse (NpuBegreb eller Elementbegreb) angivet som link til henholdsvis NpuBegreb-view eller Ele- mentbegreb-view med aktuelle Soegeterm som filtrering
+   - Sidste Kontekst.statusType
+   Det er muligt direkte fra oversigtsviewet at importere Soegeter- mer fra et regneark, jf. beskrivelsen af simpel import i afsnit
+   4.2.2.1. Følgende kolonner er obligatoriske:
+   - ENTEN NpuBegreb.npuKode ELLER Elementbegreb.ele- mentkode
+   - Soegeterm.term
+   - Soegeterm.sprog
+   Underbilag 3.1 Kravspecifikation v1 Side 43 af 87
+   Hvis der refereres til ikke-eksisterende NpuBegreb eller Ele- mentbegreb, gennemføres importen ikke, og brugeren oriente- res om problemets art og løsning.
+   Filtersektion for Søgetermer
+   Filtersektionen indeholder inputfelter til filtrering på flg. attribut- ter fra Soegeterm og associerede klasser:
+   - term
+   - sprog
+   - NpuBegreb
+   o npuKode
+   o Kort helterm
+   o oprettet dato
+   - Elementbegreb
+   o elementKode
+   o termLang (via Elementterm)
+   - Kontekst.statusType
+   - Kontekst.bruger
+   - datotid (som beskrevet i afsnit 4.2.2.2)
+   Detailview med egenskaber for Søgeterm i fokus
+   I egenskabs-detailviewet stilles flg. oplysninger til rådighed for visning og redigering:
+   - term
+   - sprog
+   - Associerede Elementbegreber med link til Elementbegreb- view og dermed mulighed for at til- og fravælge associe- ring
+   - Associerede NpuBegreber med link til NpuBegreb-view og dermed mulighed for at til- og fravælge associering
+   - Sidste Kontekst.statusType
+   (Ved redigering mulighed for ny Kontekst)
+   - Sidste Kontekst.medVirkningFra
+   (Ved redigering mulighed for ny Kontekst)
+   Underbilag 3.1 Kravspecifikation v1 Side 44 af 87
+   - Sidste Note.tekst
+   (Ved redigering mulighed for ny Note)
+****    4.3.4.1 Userstories vedrørende Søgeterm-view
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> A redaktør overblik over Soegetermer åbne Søgeterm-view, hvor man med filtrering/søgning på mange forskel- lige samtidige egenskaber kan foku- sere Soegetermer af interesse. Man kan udpege en enkelt Soegeterm og i detailview se dens detaljer.
+   B
+   redaktør
+   oprette en ny Soegeterm
+   fra oversigtsviewet at oprette en Soegeterm enten med "Opret ny" eller med "Opret kopi" som kopi af den fokuserede Soegeterm. Man kan i egenskabs-detailviewet direkte redigere den ny Soegeterms indhold og dens tilknytning til Elementbegreber eller NpuBegreber. C redaktør redigere en eksisterende Soegeterm fokusere Soegetermen og i egenskabs-detailviewet ændre dens indhold og dens tilknytning til Elementbegreber eller NpuBegreber. Systemet sikrer, at den redigerede Soegeterm afløser den tidligere på en konsistent måde.
+   D
+   redaktør
+   få overblik over direkte relaterede Elementbegreber
+   med link åbne Elementbegreb-viewet med de fokuserede Soegetermer som filtrering. Elementbegreb-viewet kan på denne måde kaldes både fra egenskabs- og fra oversigts-viewet. E redaktør få overblik over direkte relaterede NpuBegreber med link åbne NpuBegreb-viewet med de fokuserede Soegetermer som filtrering. NpuBegreb-viewet kan på denne måde kaldes både fra egenskabs- og fra oversigts-viewet.
+   F
+   redaktør
+   eksportere Soegetermer til et regneark
+   direkte fra oversigtsviewet udpege/fremsøge Soegetermer til eksport. Systemet lader mig bestemme, hvor man vil placere det resulterende regneark. Regnearket har et format, så det er klar til efterfølgende import.
+   Underbilag 3.1 Kravspecifikation v1 Side 45 af 87
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> G redaktør importere Soegetermer inkl. referencer til Elementbegreber/NpuBegreber fra et regneark fremstille et regneark med kolonner, der beskriver de ønskede data, og direkte fra Soegeterm-viewet bestille import. Systemet beder mig udpege importfilen, og hvis importen gennemføres, kan man straks i oversigtsviewet se de nye Soegetermer. Hvis importen vil bryde angivne forretningsregler, annulleres den samlede import, og man orienteres om problemets art og mulige løsninger.
+   H
+   redaktør
+   kontrollere om Soegetermer i kladde kan frigives
+   fokusere dem i oversigtsviewet og samlet forsøge at sætte dem i status klar til frigivelse. Hvis man derved bryder forretningsregler, giver systemet mig en udførlig beskrivelse af problemet og hjælp til at rette fejlene.
+   Hvis statusskiftet lykkedes kan man umiddelbart og samlet skifte status tilbage til kladde.
+**** Brugsnavn-view med userstories
+   Brugsnavn-viewet består – jvf. afsnit 4.2.2 - af:
+   - et oversigtsview i form af en tabel, der viser en liste med Brugsnavne
+   - en filter-sektion med inputfelter
+   - to overlappende detailviews (fx som faneblade), der for det fokuserede Brugsnavn viser henholdsvis egenskaber og historik.
+
+   Header for detailviews skal vise Brugsnavnets term på aktuelle releasecenters default-sprog.
+
+   Oversigtsview med Brugsnavne
+
+   Tabellen tilbyder de generelle funktionaliteter, der er beskrevet i afsnit 4.2.2. Den har flg. kolonner med attributter fra Brugsnavn og associerede klasser:
+   - term
+   - NpuBegreb.npuKode (udformet som link til NpuBegreb- view)
+   - NpuBegrebets Kort helterm
+   - Organisation.kortNavn (udformet som link til Organisation-view)
+   - gyldig-dato (via Kontekst)
+   - Sidste Kontekst.statusType
+
+   Det er muligt direkte fra oversigtsviewet at importere Brugsnavne fra et regneark, jf. beskrivelsen af simpel import i afsnit  4.2.2.1.
+
+Følgende kolonner er obligatoriske:
+   - Organisation.kortNavn
+   - NpuBegreb.npuKode
+   - Brugsnavn.term
+   - Brugsnavn.sprog
+
+   Hvis der refereres til ikke-eksisterende NpuBegreb eller Organisation, gennemføres importen ikke, og brugeren orienteres om problemets art og løsning.
+
+   Filtersektion for Brugsnavne
+   Filtersektionen indeholder inputfelter til filtrering på flg. attributter fra Brugsnavn og associerede klasser:
+   - term
+   - sprog
+   - Organisation.kortNavn
+   - NpuBegreb.npuKode
+   - NpuBegrebets Kort helterm
+   - Kontekst.statusType
+   - Kontekst.bruger
+   - datotid (som beskrevet i afsnit 4.2.2.2)
+
+   Detailview med egenskaber for Brugsnavn i fokus
+
+   I egenskabs-detailviewet stilles flg. oplysninger til rådighed for visning og redigering:
+   - term
+   - sprog
+   - Organisation.kortNavn (udformet som link til Organisa- tion-view)
+   - NpuBegreb.npuKode + NpuBegrebets Kort helterm (udformet som link til NpuBegreb-view)
+   - Sidste Kontekst.statusType   (Ved redigering mulighed for ny Kontekst)
+   - Sidste Kontekst.medVirkningFra   (Ved redigering mulighed for ny Kontekst)
+   - Sidste Note.tekst   (Ved redigering mulighed for ny Note)
+
+   Detailview med historik for Brugsnavn i fokus
+   Dette detailview er bygget som beskrevet i afsnit 4.2.2, og viser for Brugsnavnet i fokus dets kronologiske statusskift og noter i en tabel med flg. kolonner:
+   - datotid (default sidste øverst)
+   - term
+   - sprog
+   - Organisation.kortNavn
+   - NpuBegreb.npuKode
+   - NpuBegrebets Kort helterm
+   - Kontekst.statusType
+   - Kontekst.bruger
+   - Note.tekst
+****    4.3.5.1 Userstories vedrørende Brugsnavn-view
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger>
+A redaktør overblik over Brugsnavne åbne Brugsnavn-view, hvor man med filtrering/søgning på mange forskellige samtidige egenskaber kan fokusere Brugsnavne af interesse. Man kan udpege et enkelt Brugsnavn og i detailview se dets detaljer og historik.
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger>
+   B
+   redaktør
+   oprette et ny Brugsnavn
+   fra oversigtsviewet at oprette et Brugsnavn enten med "Opret ny" eller med "Opret kopi" som kopi af det fokuserede Brugsnavn. Man kan i egenskabsdetailviewet direkte redigere det ny Brugsnavns indhold og dets tilknytning til Organisationer og NpuBegreber. C redaktør redigere et eksisterende Brugsnavn fokusere Brugsnavnet og i egenskabsdetailviewet ændre dets indhold og dets tilknytning til Organisation og NpuBegreb. Systemet sikrer, at det redigerede Brugsnavn afløser det tidligere på en konsistent måde.
+   D
+   redaktør
+   se detaljer om det associerede NpuBegreb
+   med link åbne NpuBegreb-viewet fokuseret på det associerede NpuBegreb. NpuBegreb-viewet kan på denne måde kaldes både fra Brugsnavnets oversigtsview og fra dets egenskabs-detailview. E redaktør se detaljer om den associerede Organisation med link åbne Organisation-viewet fokuseret på den associerede Organisation. Organisation-viewet kan på denne måde kaldes både fra Brugsnavnets oversigtsview og fra dets egenskabsdetailview.
+   F
+   redaktør
+   eksportere Brugsnavne til et regneark
+   direkte fra oversigtsviewet udpege/fremsøge Brugsnavne til eksport. Systemet lader mig bestemme, hvor man vil placere det resulterende regneark. Regnearket har et format, så det er klar til efterfølgende import. G redaktør import af Brugsnavne fra et regneark fremstille et regneark med kolonner, der indeholder de ønskede data, og direkte fra Brugsnavn-viewet bestille import. Systemet beder mig udpege importfilen, og hvis importen gennemføres, kan man straks i oversigtsviewet se de nye Brugsnavne. Hvis importen vil bryde angivne forretningsregler, annulleres den samlede import, og man orienteres om problemets art og mulige løsninger.
+   H
+   redaktør
+   kontrollere om Brugsnavne i kladde kan frigives
+   fokusere dem i oversigtsviewet og samlet forsøge at sætte dem i status klar til frigivelse. Hvis man derved bryder forretningsregler, giver systemet mig en udførlig beskrivelse af problemet og hjælp til at rette fejlene.
+   Hvis statusskiftet lykkedes kan man umiddelbart og samlet skifte status tilbage til kladde.
+
+
+**** Terminologirelation-view med userstories
+   Terminologirelation-viewet består – jvf. afsnit 4.2.2 - af:
+   - et oversigtsview i form af en tabel, der viser en liste med Terminologirelationer
+   - en filter-sektion med inputfelter
+   - to overlappende detailviews (fx som faneblade), der for den fokuserede Terminologirelation viser henholdsvis egenskaber og historik.
+
+   Header for detailviews skal vise Terminologirelationens relaterede NPU-element (enten et NpuBegrebs Korte helterm eller et Elementbegrebs Elementterm.term) sammen med Terminologirelation.terminologi.
+
+   Oversigtsview med Terminologirelationer
+   Tabellen tilbyder de generelle funktionaliteter, der er beskrevet i afsnit 4.2.2. Den har flg. kolonner med attributter fra Terminologirelation og associerede klasser:
+
+   - NPU-elementtype: 'NpuBegreb' eller 'Elementbegreb'
+   - Afhængigt af NPU-elementtypen:
+   + [NpuBegreb.npuKode + NpuBegrebets Korte helterm] udformet som link til NpuBegreb-view
+   + [Elementbegreb.elementKode + Elementbegrebets Elementterm.term] udformet som link til Elementbegrebview
+   - relationstype
+   - begreb
+   - terminologi
+   - Sidste Kontekst.statusType
+   - Sidste Kontekst.medVirkningFra
+   - sidst tilknyttede note (evt. som link)
+
+   Det er muligt direkte fra oversigtsviewet at importere Terminologirelationer fra et regneark, jf. beskrivelsen af simpel import i afsnit 4.2.2.1. Følgende kolonner er obligatoriske:
+   - ENTEN NpuBegreb.npuKode ELLER Elementbegreb.elementkode
+   - Terminologirelation.terminologi
+   - Terminologirelation.begreb
+   - Terminologirelation.relationstype
+
+   Hvis der refereres til ikke-eksisterende NpuBegreb eller Elementbegreb, gennemføres importen ikke, og brugeren orienteres om problemets art og løsning.
+
+   Filtersektion for Terminologirelationer
+   Filtersektionen indeholder inputfelter til filtrering på flg. attributter fra Terminologirelation og associerede klasser:
+   - NpuBegreb.npuKode
+   - NpuBegrebs Lang helterm
+   - Elementbegreb.elementKode
+   - Elementbegrebs termLang (via Elementterm)
+   - terminologi
+   - begreb
+   - relationstype
+   - Kontekst.statusType
+   - Kontekst.bruger
+   - datotid (som beskrevet i afsnit 4.2.2.2)
+
+   Detailview med egenskaber for Terminologirelation i fokus
+   I egenskabs-detailviewet stilles flg. oplysninger til rådighed for visning og redigering:
+   - Relateret NPU-element som en af:
+   + [NpuBegreb.npuKode + NpuBegrebs Lang helterm] udformet som link til NpuBegreb-view, der ved nyoprettelse anvendes som pick-liste.
+   + [Elementbegreb.elementKode + Elementbegrebs termLang] udformet som link til Elementbegreb-view, der ved nyoprettelse anvendes som pick-liste.
+   - terminologi
+   - begreb
+   - relationstype
+   - maalbegrebEr
+   - Sidste Kontekst.statusType (Ved redigering mulighed for ny Kontekst)
+   - Sidste Kontekst.medVirkningFra (Ved redigering mulighed for ny Kontekst)
+   - Sidste Note.tekst   (Ved redigering mulighed for ny Note)
+
+   Detailview med historik for Terminologirelation i fokus
+   Dette detailview er bygget som beskrevet i afsnit 4.2.2, og viser for Terminologirelationen i fokus dens kronologiske statusskift og noter i en tabel med flg. kolonner:
+   - datotid (default sidste øverst)
+   - Relateret NPU-element som en af:
+   o [NpuBegreb.npuKode + NpuBegrebs Lang helterm]
+   o [Elementbegreb.elementKode + Elementbegrebs termLang]
+   - terminologi
+   - begreb
+   - relationstype
+   - maalbegrebEr
+   - Kontekst.statusType
+   - Kontekst.medVirkningFra
+   - Kontekst.bruger
+   - Note.tekst (evt som link)
+   4.3.6.1 Userstories vedrørende Terminologirelation-view
+    Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger>
+A redaktør overblik over Terminologirelationer åbne Terminologirelation-view, hvor man med filtrering/søgning på mange forskellige samtidige egenskaber kan fokusere Terminologirelationer af interesse. Man kan udpege en enkelt Terminologirelation og i detailview se dens detaljer og historik.
+B redaktør  oprette en ny Terminologirelation
+   fra oversigtsviewet at oprette en Terminologirelation enten med "Opret ny" eller med "Opret kopi" som kopi af den fokuserede Terminologirelation. Man kan i egenskabs-detailviewet direkte redigere den ny Terminologirelations indhold og dens tilknytning til enten et Elementbegreb eller et NpuBegreb.
+C redaktør redigere en eksisterende Terminologirelation fokusere Terminologirelationen og i egenskabs-detailviewet ændre dens indhold.
+D redaktør
+   få overblik over en Terminologirelations associerede Elementbegreb
+   med link åbne Elementbegreb-viewet med den fokuserede Terminologirelation som filtrering. Elementbegrebviewet kan på denne måde kaldes både fra oversigtsviewet og fra egenskabsdetailviewet. E redaktør få overblik over en Terminologirelations associerede NpuBegreb med link åbne NpuBegreb-viewet med den fokuserede Terminologirelation som filtrering. NpuBegreb-viewet kan på denne måde kaldes både fra oversigtsviewet og fra egenskabs-detailviewet.
+   F
+   redaktør
+   eksportere Terminologirelationer med tilhørende relationer til Elementbegreb/NpuBegreb til et regneark
+   direkte fra oversigtsviewet udpege/fremsøge Terminologirelationer til eksport. Systemet lader mig bestemme, hvor man vil placere det resulterende regneark. Regnearket har et format, så det er klar til efterfølgende import. G redaktør import af Terminologirelationer med tilhørende relationer til Elementbegreb/NpuBegreb fra et regneark fremstille et regneark med kolonner, der indeholder de ønskede data, og direkte fra Terminologirelation-viewet bestille import. Systemet beder mig udpege import-filen, og hvis importen gennemføres, kan man straks i oversigtsviewet se de nye Terminologirelationer. Hvis importen vil bryde angivne forretningsregler, annulleres den samlede import, og man orienteres om problemets art og mulige løsninger.
+   H
+   redaktør
+   kontrollere om Terminologirelationer i kladde kan frigives
+   fokusere dem i oversigtsviewet og samlet forsøge at sætte dem i status klar til frigivelse. Hvis man derved bryder forretningsregler, giver systemet mig en udførlig beskrivelse af problemet og hjælp til at rette fejlene.
+   Hvis statusskiftet lykkedes kan man umiddelbart og samlet skifte status tilbage til kladde.
+   Underbilag 3.1 Kravspecifikation v1 Side 53 af 87
+   Publikation
+   Adgang til NPU-terminologiens baggrundsdata kræver licens, og download af NPU-terminologiens fulde datasæt kan derfor kun foretages af brugere i rollen som redaktør.
+   Publikation af NPU-terminologi sker primært release-baseret i form af:
+   - Centralt release omfatter de internationale NPU-elementer og er rettet mod nationale releasecentre
+   - Nationalt release omfatter de nationale NPU-elementer og er rettet mod registrerede brugere, fx laboratoriesystemer
+   Både centralt og nationalt release er XML-baseret, dog skal dansk nationalt release i en overgangsperiode desuden kunne leveres i det aktuelle CSV-format.
+   Løsningen omfatter desuden:
+   - Et API, som gør det muligt for en redaktør eller registreret bruger at hente tidstro NPU-data.
+   - En Web-portal med denne funktionalitet:
+   o redaktører kan via portalen hente centrale og nationale releases
+   o registrerede brugere kan via portalen hente nationale releases
+   o anonyme brugere kan fremsøge tidstro NPU-data og downloade resultatet af disse søgninger.
+   Centralt release
+   Centralt release omfatter international NPU, er rettet mod andre releasecentre og skal kunne danne grundlag for udformning af nationale NPU-derivater – fx fra nationale releasecentre, der ikke anvender Løsningen.
+   Kun brugere i rollen som redaktør har adgang til at downloade centralt release. Download af centralt release logges med registrering af bruger og IP-adresse.
+   Centralt release er baseret på et XML-skema, som for ethvert NPU-element, der "ejes af" det internationale releasecenter, kan udtrykke forløbet af elementets indhold og relationer indenfor tilstandene aktiv og inaktiv – altså disse NPU-elementers fulde historik som frigivne.
+   Det omtalte XML-skema skal direkte kunne henføres til den logiske model beskrevet i udbudsmaterialets underbilag 3.4, dog med følgende afvigelser:
+
+   - NPU-elementers tilknyttede noter (Kontekst og noter::Note) er ikke en del af XML-skemaet. Det internationale releasecenters interne noteapparat gøres således ikke til genstand for udveksling.
+   - I XML-skemaets afbildning af NpuBegreb tilføjes to attributter – kortHelterm og langHelterm – med henblik på i releaset at udtrykke disse to egenskaber statisk.
+   XML-skemaet har indbygget sådanne frihedsgrader i forhold til indholdet, at samme skema kan anvendes til at udtrykke de tre varianter af centralt release:
+   - Centralt, fuldt release omfatter alle det internationale releasecenters frigivne NPU-elementer med al deres historik indenfor tilstandene aktiv og inaktiv.
+   - Centralt snapshot release – omfatter alle det internationale releasecenters frigivne NPU-elementer i den tilstand og med det indhold og de relationer, som elementerne har på release-tidspunktet – dvs. uden anden historik end den seneste frigivelsesstatus.
+   - Centralt delta release – relaterer sig til et givet snapshot release, og omfatter alle ændringer i frigivne NPU-elementers indhold og relationer siden dette snapshot.
+   Når releasedokumenter dannes, navngiver Løsningen dem på en måde, så det af navnet klart fremgår, hvad det er for en variant, og hvornår den er dannet.
+
+****    4.4.1.1 Userstories vedrørende centralt release
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> A internatio- nal redak- tør publicere et cen- tralt release fra Løsningens hovedmenu markerer man, at systemet skal foretage denne type publikation, og systemet beder brugeren angive den releasedato, som skal lægges til grund for publikationen. Mens publikationsfilerne dannes, kan man hele tiden få informativ feedback om processen. Når processen er tilendebragt bliver man orienteret om, at de tre resulte- rende XML-dokumenter nu ligger klar til download.
+   B
+   internatio- nal redak- tør
+   redigere udvalget af publicerede centrale releases
+   fra Løsningens hovedmenu markerer man, at man vil se indholdet af down- load-området. Løsningen fremviser på en overskuelig måde områdets indhold, og man har for hvert release mulighed for at downloade eller slette XML-doku- menter.
+   Underbilag 3.1 Kravspecifikation v1 Side 55 af 87
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> C redaktør downloade et el- ler flere centrale releases fra web-portalen markerer man efter login, at man vil se indholdet af down- load-området. Løsningen fremviser på en overskuelig måde områdets indhold med links, så man umiddelbart kan downloade de ønskede XML-dokumenter.
+   Nationalt release
+   Nationalt release er rettet mod laboratoriesystemer – terminolo- giens intenderede slutbrugere.
+   Kun registrerede brugere har adgang til at downloade nationalt release. Download af nationalt release logges med registrering af bruger og IP-adresse.
+   Udgangspunktet for et nationalt release er det nationale release- centers NPU-derivater i form af oversættelse og udvidelse – jf. afsnit 3.1. Det nationale release tager derfor udgangspunkt i NPU-elementer, der enten er "ejet af" det internationale eller af det pågældende nationale releasecenter.
+   Nationalt release er baseret på et XML-skema, som for de neden nævnte NPU-elementer kan udtrykke deres indhold, historik og relationer indenfor tilstandene aktiv og inaktiv. Nationalt release omfatter det nationale releasecenters NPU-derivater og er be- grænset til at omfatte disse NPU-elementer:
+   o Flg. attributter fra NpuBegreb:
+    npuKode
+    vaerdiskalaType
+    kontekstBestemt
+   o NpuBegrebets nationale udgave af Kort helterm og Lang helterm udtrykt som attributter til NpuBegrebet
+   o Sidste Versionsnote
+   o associerede NpuBegreber (udtrykt som npuKode) gen- nem [erstatter/erstattet af]
+   o Aggregerede NpuGruppeLister
+   o Aggregerede Brugsnavn(e)
+   XML-skemaet har indbygget sådanne frihedsgrader i forhold til indholdet, at samme skema kan anvendes til at udtrykke de to varianter af nationalt release:
+   Underbilag 3.1 Kravspecifikation v1 Side 56 af 87
+   - Nationalt snapshot release – omfatter NPU-elementer af de angivne typer i den tilstand og med det indhold og de relationer, som elementerne har på release-tidspunktet.
+   - Nationalt delta release – relaterer sig til et givet snapshot release, og omfatter for samme udvalg af NPU-elementer alle ændringer i frigivne NPU-elementers indhold og relati- oner siden dette snapshot.
+   Når releasedokumenter dannes, navngiver Løsningen dem på en måde, så det af navnet klart fremgår, hvad det er for en variant, og hvornår den er dannet.
+   I en overgangsperiode skal Løsningen – af historiske årsager – desuden kunne publicere de samme data – båe snapshot og delta - men udtrykt som "flade filer" i CSV-format (Ms-style).
+   4.4.2.1 Userstories vedrørende nationalt release
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> A redaktør publicere et nati- onalt release fra Løsningens hovedmenu markerer man, at systemet skal foretage denne type publikation, og systemet beder brugeren angive den releasedato, som skal lægges til grund for publikationen. Mens publikationsfilerne dannes, kan man hele tiden få informativ feedback om processen. Når processen er tilendebragt bliver man orienteret om, at de resulterende filer nu ligger klar til, at registrerede brugere (fx laboratorier) kan downlade dem.
+   B
+   redaktør
+   redigere udvalget af publicerede nationale relea- ses
+   fra Løsningens hovedmenu markerer man, at man vil se indholdet af down- load-området. Løsningen fremviser på en overskuelig måde områdets indhold, og man har for hvert release mulighed
+   for at downloade eller slette releasefi- ler. C regis- treret bruger downloade natio- nalt release fra webportalen markerer man efter lo- gin, at man vil se indholdet af down- load-området. Løsningen fremviser på en overskuelig måde områdets indhold med links, så man umiddelbart kan downloade øn- skede publikationsfiler.
+   Underbilag 3.1 Kravspecifikation v1 Side 57 af 87
+   API-adgang til tidstro NPU-data
+   Som alternativ til releasebaserede NPU-data skal Løsningen om- fatte et REST-baseret10 API , der gør det muligt programmatisk at specificere og hente et tidstro11 udtræk af NPU-data.
+   Kun redaktører og registrerede brugere har adgang til at benytte API-adgangen, og da behovet for tidstro adgang til NPU-data endnu kun er delvist afklaret, begrænses adgangen foreløbigt således, at API'et kun server internationale NPU-data, og at kun redaktører har API-adgang. På sigt er det tanken, at API-adgan- gen stilles til rådighed for registrerede brugere, men dette kræ- ver nøjere analyse af behov og muligheder.
+   Mulighederne for programmatisk at specificerer udtræk skal udvikles i samarbejde mellem Kunden og Leverandøren. Ud- gangspunktet for at specificere udtræk er de muligheder, der nedenfor er beskrevet i afsnittet om webportalens Søgefunktion.
+   API'et returnerer NPU-data under anvendelse af det XML-skema, der er beskrevet i afsnit 4.4.1 om Centralt release.
+   Anvendelse af API-adgangen logges med registrering af bruger, søgevektor, IP-adresse og volumen.
+   Web-portal
+   Løsningen skal præsentere NPU-terminologi gennem en web- portal, der gør det muligt at foretage opslag og på baggrund af søgning og filtrering se og downloade tidstro udtræk af NPU- data.
+   Portalen skal kunne tilgåes af alle, dog således, at:
+   - kun redaktører har adgang til centrale releases
+   - kun registrerede brugere har adgang til nationale releases
+   Anvendelsen af webportalen logges med registrering af søgevek- tor, IP-adresse og volumen.
+   Start/præsentationssiden
+   Flag-markering til valg af sprogversioner fx dansk, svensk, en- gelsk (international):
+   10 REST: REpresentational State Transfer. Se evt. https://www.codecademy.com/ar- ticles/what-is-rest
+   11 "Tidstro adgang" betyder i denne forbindelse, at ændrede NPU-data står til rådighed for API-adgang indenfor få minutter.
+   Underbilag 3.1 Kravspecifikation v1 Side 58 af 87
+   Det skal være muligt at vælge sprogversion.
+   Der kan tænkes forskellige løsninger for designet af LabTerm2 Startsiden:
+   - Som nuværende én præsentationside med præsentation af NPU terminologien og med bokse i hhv. højre og venstre side med links til supplerende informationer.
+   - Eller som faner med Søge – og download funktioner og supplerende information
+   Det vil være hensigtsmæssigt at have kontaktinformation, overskrifter m. links til diverse relevante hjemmesider.
+   Søgefunktion
+   De her omtalte søgninger anvender wildcardsøgning, som angi- vet i omtalen af tekstuelle filtre i afsnit 4.2.2.2.
+   Det skal være muligt at udsøge NPU-begreber ved:
+   - Simpel søgning:
+   o Tekstsøgning skal matche mod komponent12 eller mod systemets Søgetermer.
+   o Søgning på NpuBegreb.npuKode.
+   - Avanceret søgning = valgfri kombination af søgninger på:
+   o Komponent12
+   o System13
+   o Egenskabsart13
+   o Enhed13
+   o om header for en NpuGruppe
+   o om medlem af en given NpuGruppe
+   o specialeType
+   o Status:
+    kun aktive
+    kun inaktive
+    både aktive og inaktive (= frigivne)
+   12 Elementtermen for det Elementbegreb, der optræder på position-0 i listen over Elementbe- greber knyttet til den Syntaxgruppe, som i syntaksen repræsenterer Komponent.
+   13 Samme måde at specificere en Elementterm som angivet i forrige fodnote vedr. Kompo- nent, her blot baseret på en anden type Syntaxgruppe.
+   Underbilag 3.1 Kravspecifikation v1 Side 59 af 87
+   o Dato for
+    frigivelse
+    revision (= Versionsnotes frigivelse)
+   Søgefunktionaliteternes visuelle design skal udvikles i samarbejde mellem Kunden og Leverandøren.
+   Anvendelsen af webportalens søgefunktionalitet logges med re- gistrering af søgevektor, IP-adresse og volumen.
+   Visning af søgeresultat
+   Søgeresultater vises i et oversigts- og et detailview, som er ind- byrdes koordinerede således, at man med klik på links i ét view påvirker indholdet af det andet.
+   Visning og download af søgeresultater omfatter alene de herun- der nævnte NPU-elementer:
+   - Oversigtsview
+   o Resultatet af søgning skal vises som et oversigtsview med alle hits, hvert hit med link, der kan åbne et Detailview.
+   o Der vises npuKode, Kort helterm, Lang helterm, Brugs- navn og status (aktiv/inaktiv).
+   - Detailview
+   o NpuBegreb.npuKode
+   o Sidste Versionsnote
+   o Kort helterm
+   o Lang helterm
+   o Brugsnavn(e)
+   o Skalatype
+   o Listesammenhænge – ’indgår i liste’/’er liste og indeholder’. Med links som i dag til indhold/lister, så man hele tiden kan komme rundt fra lister til indhold til lister
+   o Oplysning om eventuelt erstatningsbegreb for inaktiveret begreb
+   o Desuden skal det være muligt at vise evt. Terminologi- relation for NpuBegreber
+   Underbilag 3.1 Kravspecifikation v1 Side 60 af 87
+   Download af søgeresultater
+   Alle brugere har adgang til at downloade NPU-data fra de to views. Download sker i CSV-format (MsExcel-style) og omfatter præcis de oplysninger, som ovenfor er angivet for de enkelte views.
+   Download fra webportalen logges med registrering af søgevek- tor, IP-adresse og volumen.
+   4.4.4.1 Userstories vedrørende ekstern webportal
+   # Som en <rolle> vil man opnå <dette resultat> ved at <udføre disse handlinger> A anonym bruger se og hente op- lysninger om et eller flere NPU- begreber angive søgeparametre, hvorefter syste- met præsenterer oversigtsviewet med de NpuBegreber, der opfylder søgekri- terierne. Man kan dynamisk ændre de angivne søgeparametre, og se hvordan resulta- tet ændrer sig. Man kan med klik på et fremsøgt Npu- Begreb se dets detaljerede oplysninger i detailviewet. Hvis man ønsker at downloade resulta- tet af oversigt eller detalje, kan man angive download-filens navn og place- ring, hvorefter systemet genererer en fil med præcis de oplysninger, som fremgår af det aktuelle view.
+   (Userstories vedrørende download af centrale og nationale relea- ses fra webportalen er tidligere beskrevet i afsnittene 4.4.1.1 og 4.4.2.1.)
+   Underbilag 3.1 Kravspecifikation v1 Side 61 af 87
+* 5 FUNKTIONELLE KRAV
+De funktionelle krav skal opfattes som en behovsopgørelse som understøtter arbejdsgange og forretningsmæssige mål.
+Den narrative beskrivelse i de ovenstående kapitler, bør læses grundigt og vil bidrage til forståelsen af de enkelte krav.
+Såfremt der skulle være uoverensstemmelser mellem den foregående narrative beskrivelse og de efterfølgende krav, er det kravene i nedenstående tabeller, der har forrang.
+I dette kapitel er Kundens funktionelle krav formaliseret og opdelt på følgende kravområder:
+- Krav vedr. besvarelsens udformning
+- Krav vedr. NPU-terminologiens struktur
+- Krav vedr. roller og releasecentre
+- Krav vedr. generel funktionalitet for redaktører
+- Krav vedr. funktionalitet knyttet til centrale views
+- Krav vedr. publikation
+
+** Krav vedr. besvarelsens udformning
+Tilbudsgivers beskrivelse af NPU-terminologien, dens derivater, Løsningens funktionaliteter, roller, views og publikation skal overalt i løsningsbeskrivelse og besvarelse af funktionelle krav tage udgangspunkt i Kundens termer, som disse fremgår af udbudsmaterialets konceptuelle og logiske model - henholdsvis underbilag 3.1 og 3.4.
+Nr Type Kravtekst Afsnit 3.1.5-A MK Termer til beskrivelse af NPU-terminologien Tilbudsgiver skal sikre, at beskrivelsen af NPU-terminologien og dens derivater overalt i løsningsbeskrivelse og besvarelse af funktionelle krav tager udgangspunkt i Kundens termer, som disse fremgår af udbudsmaterialets konceptuelle og logi- ske model - henholdsvis underbilag 3.1 og 3.4. Der henvises specielt til termlisten (Appendix-1 i underbilag 3.1). 3.1.5
+Underbilag 3.1 Kravspecifikation v1 Side 62 af 87
+Nr Type Kravtekst Afsnit Termer til beskrivelse af Løsningens funktionalitet Tilbudsgiver skal sikre, at beskrivelsen af Løsningens funktio- naliteter, roller, views og publikation overalt i løsningsbeskri- 3.1.5-B MK velse og besvarelse af funktionelle krav tager udgangspunkt i Kundens termer, som disse fremgår af udbudsmaterialets konceptuelle og logiske model - henholdsvis underbilag 3.1 og 3.4. Der henvises specielt til termlisten (Appendix-1 i un- derbilag 3.1). 3.1.5
+Krav vedr. NPU-terminologiens struktur
+
+*** Nr Type Kravtekst Afsnit 3.1.3.1-A MK Overordnet modelmedholdelighed
+Løsningen skal kunne behandle NPU-terminologiens begre- ber og relationer som beskrevet i afsnit 3.1 om den konceptu- elle model. 3.1.3.1 3.1.3.1-B K Konceptuel modelmedholdelighed Tilbudsgiver bedes beskrive, hvordan Løsningen behandler NPU-terminologiens begreber. Det vægter positivt, at beskri- velsen omfatter NPU-syntaxen, dannelsen af lang og kort hel- term, relationen mellem elementbegreb og elementterm, dan- nelsen af NPU-grupper og forskellen på international NPU og nationale derivater heraf. 3.1.3.1 3.1.3.1-C K Supplerende NPU-derivater Der kan blive behov for at supplere NPU -terminologien med national information om gruppering i forbindelse med visning af analyseresultater. Løsningen skal være forberedt på at kunne understøtte, at national information om gruppering af analyseresultater kan indlæses og vedligeholdes. Det vægter positivt at Løsningen er forberedt på at kunne understøtte indlæsning og vedligeholdelse af national information om gruppering af analyseresultater på en brugervenlig måde. 3.1.3.1 3.1.3.1-D MK NPU-terminologiens termer Løsningen skal kunne behandle alle NPU-terminologiens ter- mer, jf underbilag 3.1, afsnit 3.1.1. 3.1.3.1 3.1.3.1-E K Inddatering, visning og publikation af NPU-terminologi- ens termer Løsningen skal både ved inddatering, visning og publikation kunne behandle alle terminologiens termer, jf underbilag 3.1, afsnit 3.1.1. Tilbudsgiver bedes detaljeret beskrive, hvordan formateret tekst behandles ved input, ved visning i brugerfla- den og ved publikation. Tilbudsgiver bedes herunder beskrive anvendelsen af tegnsæt, formaterings-koder og specielle tegn. Det vægter positivt, at input af formateret tekst sker uden at brugeren anvender koder, at formateret tekst overalt behand- les på en konsistent måde, og at Tilbudsgiver beskriver sin proces med at afdække, hvad der kræves for at behandle NPU-terminologiens termer. 3.1.3.1
+ Underbilag 3.1 Kravspecifikation v1 Side 63 af 87
+
+ Nr Type Kravtekst Afsnit 3.1.3.2-A K Logisk modelmedholdelighed Løsningen skal datalogisk kunne behandle NPU-elementer med det indhold, de relationer, de kardinaliteter, de multiplici- teter og de forretningsregler, som er beskrevet i den logiske model, jf. udbudsmaterialets underbilag 3.4. Tilbudsgiver be- des beskrive, hvordan Løsningen datalogisk behandler NPU- terminologien. Det vægter positivt, at Tilbudsgiver detaljeret beskriver samspillet mellem NPU-elementerne: Elementbe- greb, NpuBegreb og Organisation. 3.1.3.2 3.1.3.3-A K Terminologiens historik Løsningen skal kunne håndtere NPU-terminologien med hi- storik og tilstandsskift som beskrevet i udbudsmaterialet. Til- budsgiver bedes beskrive, hvordan Løsningen styrer NPU- elementernes tilstandsskift og historik. Det vægter positivt, at Tilbudsgiver beskriver NPU-elementers livscyklus og den i Løsningen anvendte metode til at sikre NPU-elementernes hi- storik. 3.1.3.3
+ Krav vedr. r
+ oller og releasecentre
+ Nr Type Kravtekst Afsnit 3.1.4.1-A MK Brugere fra internationalt releasecenter Brugere, der er tilknyttet det internationale releasecenter, kan eksklusivt vedligeholde og publicere den internationale NPU- terminologi. 3.1.4.1 3.1.4.1-B MK Brugere fra nationalt releasecenter Brugere, der er tilknyttet et nationalt releasecenter, kan eks- klusivt vedligeholde og publicere dette releasecenters natio- nale NPU-derivater. 3.1.4.1 3.1.4.1-C MK Funktionel separation af brugere Løsningen skal sikre, at nationale releasecentre hverken i for- hold til funktion eller anvendelsen af terminologi-artefakter på- virker hinanden. 3.1.4.1 3.1.4.1-D MK Sikring mod utilsigtet påvirkning af nationale NPU-deriva- ter Løsningen skal sikre, at brugere fra det internationale relea- secenter ikke uforvarende ændrer grundlaget for nationale NPU-derivater. 3.1.4.1 3.1.4.1-E K Konfliktsituationer Tilbudsgiver bedes beskrive de potentielle konflikter mellem forskellige typer releasecentre for såvidt angår funktionalitet og terminologiske artefakter, herunder hvordan Løsningen undgår eller resolverer sådanne konflikter. Det vægter positivt at Tilbudsgiver beskriver flere konflikt-scenarier og at beskri- velsen omfatter, hvordan scenarierne opleves af brugerne. 3.1.4.1
+ Underbilag 3.1 Kravspecifikation v1 Side 64 af 87
+ Nr Type Kravtekst Afsnit 3.1.4.1-F K Indgående brugerroller Løsningen skal kunne anvendes af brugere i de roller, der er angivet i afsnit 4.1. Tilbudsgiver skal beskrive de enkelte rol- ler. Det vægter positivt at beskrivelsen redegør for rollernes formål og funktion, herunder for hvordan Løsningen sikrer au- tentifikation. 3.1.4.1 3.1.4.1-G K Flere brugere samtidigt Løsningen skal samtidigt kunne benyttes af flere brugere fra samme og fra forskellige releasecentre. Det vægter positivt at Tilbudsgiver detaljeret beskriver på hvilke niveauer og under hvilke betingelser NPU-data låses, herunder hvorledes låsnin- gen opdages og opleves af brugerne. 3.1.4.1 3.1.4.1-H MK Supplerende releasecentre Løsningen skal kunne suppleres med yderligere releasecen- tre. Disse skal - på helt samme måde som det beskrevne danske NRC - kunne redigere egne NPU-derivater i deres eget sprog, have deres egne brugere og foretage egne publi- kationer. 3.1.4.1 3.1.4.1-I K Retningslinjer for adgangsstyring Tilbudsgiver er forpligtet til at efterleve Kundens ret- ningslinjer vedr. adgangsstyring jf. Underbilag 3.1, af- snit 4.1.6. Det vægter positivt, at Tilbudsgiver detaljeret beskriver, hvordan Løsningen realiserer adgangssty- ring. 3.1.4.1 3.1.4.1-J K Rettigheder til Løsningens funktioner Adgang til funktioner i Løsningen skal være baseret på roller og rettigheder, som disse fremgår af underbilag 3.1, afsnit 4.1.Det vægter positivt, at Tilbudsgiver detal- jeret beskriver adgangen til Løsningens funktioner. 3.1.4.1 3.1.4.1-K K Rettigheder til NPU-data Adgang til Løsningens data skal være baserede på rol- ler og rettigheder, som disse fremgår af underbilag 3.1, afsnit 4.1. Det vægter positivt at Tilbudsgiver detaljeret beskriver adgang til data i Løsningen. 3.1.4.1
+ Underbilag 3.1 Kravspecifikation v1 Side 65 af 87
+ Krav vedr. generel funktionalitet for redaktører
+ Nr Type Kravtekst Afsnit 3.1.4.2-A K Adgang til flere sprog og/eller releasecentre Det skal være muligt for en redaktør at have flere sprog og eventuelt flere releasecentre til sin rådighed, og at kunne skifte imellem dem. Tilbudsgiver bedes beskrive, hvordan en redaktør kan skifte sit aktuelle sprog eller aktuelle releasecen- ter. Det vægter positivt at tilknytning til flere releasecentre og skift af sprog er løst på en smidig og generaliseret måde. 3.1.4.2 3.1.4.2-B MK Skift af aktuelt releasecenter Når en redaktør skifter aktuelt releasecenter, bliver indholdet af alle åbne views automatisk opdateret, så viste data afspej- ler dette skift, uden iøvrigt at ændre viewenes parametre og aktuelle konfiguration. En redaktørs skift af aktuelt release- center kræver logout-login, men blot med password (single- factor authentication). 3.1.4.2 3.1.4.2-C MK Skift af aktuelt sprog Når en redaktør skifter aktuelt sprog, bliver indholdet af alle åbne views automatisk opdateret, så viste data afspejler dette skift, uden iøvrigt at ændre viewenes parametre og aktuelle konfiguration. En redaktørs skift af aktuelt releasecenter kræ- ver ikke logout-login. 3.1.4.2 3.1.4.2-D K De centrale views Løsningen skal omfatte de beskrevne centrale views, hvert dedikeret til et centralt NPU-element. Tilbudsgiver bedes be- skrive i hvilket omfang og på hvilken måde en redaktør kan skifte mellem de centrale views. Det vægter positivt at de centrale views kan ko-eksistere som (delvist) overlappende vinduer, at de centrale views kan åb- nes parameterstyret, at deres indhold automatisk og tidstro opdateres og at man let og formålsbestemt kan hoppe fra det ene centrale view til det andet. 3.1.4.2 3.1.4.2-E K Visning og publikation af kort og lang heltermNpuBegre- bers kort og lang helterm skal dannes dynamisk, således at visning og publikation af disse altid gengiver opdaterede data. Tilbudsgiver bedes beskrive hvordan visning af NpuBegreber opdateres dynamisk, når deres relaterede NPU-elementer ændres.Det vægter positivt at beskrivelsen omfatter alle de NPU-elementer, der er relevante for et NpuBegrebs korte og lange helterm. 3.1.4.2
+ Underbilag 3.1 Kravspecifikation v1 Side 66 af 87
+ Nr Type Kravtekst Afsnit 3.1.4.2-F K Batch-operationer vedrørende statusskift og annotation For alle centrale views skal det være muligt at fremsøge/ud- pege et antal af viewets NPU-elementer og som batch-opera- tion foretage fælles statusskift og/eller fælles annotation som angivet i afsnit 4.2.2.1. Tilbudsgiver bedes beskrive hvordan denne batch-funktionali- tet tilvejebringes og i hvilke centrale views den implemente- res. Det vægter positivt at mange centrale views har denne funktionalitet, at den er let at administrere og at NPU-elemen- terne kan fremsøges/udpeges på en effektiv måde. 3.1.4.2 3.1.4.2-G MK Simpel dataeksport relateret til centrale views For alle centrale views skal det være muligt at fremsøge/ud- pege et antal af viewets NPU-elementer og - med henblik på ekstern databehandling - at eksportere dem til et regneark, som angivet i afsnit 4.2.1.5 og afsnit 4.2.2.1. Eksporten skal omfatte ID'er og andre metadata, som understøtter senere genindlæsning. 3.1.4.2 3.1.4.2-H MK Simpel dataimport relateret til centrale views I forbindelse med flere centrale views er der i userstories be- skrevet simpel import af NPU-elementer fra regneark. Simpel import forløber som beskrevet i afsnit 4.2.2.1, herunder at ek- sisterende NPU-elementer i status kladde kan blive overskre- vet med importens data. 3.1.4.2
+ Krav vedr. funktionalitet knyttet til centrale views
+ Nr Type Kravtekst Afsnit 3.1.4.3-A MK Elementbegreb-view Løsningen skal omfatte et Elementbegreb-view som sætter en redaktør i stand til at få overblik over og behandle syste- mets indhold af denne type NPU-element. Dette view skal være direkte tilgængeligt fra systemets hovedmenu. 3.1.4.3 3.1.4.3-B K Elementbegreb-view, funktionalitet Løsningens Elementbegreb-view skal sætte en redaktør i stand til at nyoprette, redigere, inaktivere og se historik for det enkelte Elementbegreb, og at udpege og/eller fremsøge et el- ler flere af dem med henblik på videre behandling. Tilbudsgi- ver bedes beskrive de funktionaliteter, som Elementbegreb- viewet tilbyder. Det vægter positivt at Løsningen i stort omfang understøtter de funktionaliteter og userstories, der er beskrevet i afsnittene 4.2 og 4.3.1, og at denne understøttelse er detaljeret beskre- vet. 3.1.4.3 3.1.4.3-C MK Elementbegreb-view, essentielle userstories Userstories 4.3.1.1-D, -M og -N kan afvikles som beskrevet i udbudsmaterialet. 3.1.4.3
+ Underbilag 3.1 Kravspecifikation v1 Side 67 af 87
+ Nr Type Kravtekst Afsnit 3.1.4.3-D MK Organisation-view Løsningen skal omfatte et Organisation-view som sætter en redaktør i stand til at få overblik over og behandle systemets indhold af denne type NPU-element. Dette view skal være di- rekte tilgængeligt fra systemets hovedmenu. 3.1.4.3 3.1.4.3-E K Organisation-view, funktionalitet Løsningens Organisation-view skal sætte en redaktør i stand til at nyoprette, redigere, inaktivere og se historik for det en- kelte Organisation, og at udpege og/eller fremsøge et eller flere af dem med henblik på videre behandling. Tilbudsgiver bedes beskrive de funktionaliteter, som Organisation-viewet tilbyder. Det vægter positivt at Løsningen i stort omfang understøtter de funktionaliteter og userstories, der er beskrevet i afsnittene 4.2 og 4.3.2, og at denne understøttelse er detaljeret beskre- vet. 3.1.4.3 3.1.4.3-F MK Organisation-view, essentielle userstories Userstory 4.3.2.1-G kan afvikles som beskrevet i udbudsma- terialet. 3.1.4.3 3.1.4.3-G MK NpuBegreb-viewLøsningen skal omfatte et NpuBegreb-view som sætter en redaktør i stand til at få overblik over og be- handle systemets indhold af denne type NPU-element. Dette view skal være direkte tilgængeligt fra systemets hovedmenu. 3.1.4.3 3.1.4.3-H K NpuBegreb-view, funktionalitet Løsningens NpuBegreb-view skal sætte en redaktør i stand til at nyoprette, redigere, inaktivere og se historik for det enkelte NpuBegreb, og at udpege og/eller fremsøge et eller flere af dem med henblik på videre behandling. Tilbudsgiver bedes beskrive de funktionaliteter, som NpuBegreb-viewet tilbyder. Det vægter positivt at Løsningen i stort omfang understøtter de funktionaliteter og userstories, der er beskrevet i afsnittene 4.2 og 4.3.3, og at denne understøttelse er detaljeret beskre- vet. 3.1.4.3 3.1.4.3-I MK NpuBegreb-view, essentielle userstories Userstory 4.3.3.1-D og -K kan afvikles som beskrevet i ud- budsmaterialet. 3.1.4.3 3.1.4.3-J MK Søgeterm-view Løsningen skal omfatte et Søgeterm-view som sætter en re- daktør i stand til at få overblik over og behandle systemets indhold af denne type NPU-element. Dette view skal være di- rekte tilgængeligt fra systemets hovedmenu. 3.1.4.3
+ Underbilag 3.1 Kravspecifikation v1 Side 68 af 87
+ Nr Type Kravtekst Afsnit 3.1.4.3-K K Søgeterm-view, funktionalitet Løsningens Søgeterm-view skal sætte en redaktør i stand til at nyoprette, redigere, inaktivere og se historik for det enkelte Søgeterm, og at udpege og/eller fremsøge et eller flere af dem med henblik på videre behandling. Tilbudsgiver bedes beskrive de funktionaliteter, som Søgeterm-viewet tilbyder. Det vægter positivt at Løsningen i stort omfang understøtter de funktionaliteter og userstories, der er beskrevet i afsnittene 4.2 og 4.3.4, og at denne understøttelse er detaljeret beskre- vet. 3.1.4.3 3.1.4.3-L MK Søgeterm-view, essentielle userstories Userstory 4.3.4.1-C, -F og -G kan afvikles som beskrevet i udbudsmaterialet. 3.1.4.3 3.1.4.3-M MK Brugsnavn-viewLøsningen skal omfatte et Brugsnavn-view som sætter en redaktør i stand til at få overblik over og be- handle systemets indhold af denne type NPU-element. Dette view skal være direkte tilgængeligt fra systemets hovedmenu. 3.1.4.3 3.1.4.3-N K Brugsnavn-view, funktionalitet Løsningens Brugsnavn-view skal sætte en redaktør i stand til at nyoprette, redigere, inaktivere og se historik for det enkelte Brugsnavn, og at udpege og/eller fremsøge et eller flere af dem med henblik på videre behandling. Tilbudsgiver bedes beskrive de funktionaliteter, som Brugsnavn-viewet tilbyder. Det vægter positivt at Løsningen i stort omfang understøtter de funktionaliteter og userstories, der er beskrevet i afsnittene 4.2 og 4.3.5, og at denne understøttelse er detaljeret beskre- vet. 3.1.4.3 3.1.4.3-O MK Brugsnavn-view, essentielle userstories Userstory 4.3.5.1-C, -F og -G kan afvikles som beskrevet i udbudsmaterialet. 3.1.4.3 3.1.4.3-P K Terminologirelation-view Løsningen skal omfatte et Terminologirelation-view som sæt- ter en redaktør i stand til at få overblik over og behandle sy- stemets indhold af denne type NPU-element. Dette view skal være direkte tilgængeligt fra systemets hovedmenu. Det vægter positivt, at det er beskrevet hvorledes Terminologirelation-view er tilgængeligt fra systemets hovedmenu og fremstår brugervenligt. 3.1.4.3 3.1.4.3-Q K Terminologirelation-view, funktionalitet Løsningens Terminologirelation-view skal sætte en redaktør i stand til at nyoprette, redigere, inaktivere og se historik for den enkelte Terminologirelation, og at udpege og/eller frem- søge en eller flere af dem med henblik på videre behandling. Tilbudsgiver bedes beskrive de funktionaliteter, som Termino- logirelation-viewet tilbyder. Det vægter positivt at Løsningen i stort omfang understøtter de funktionaliteter og userstories, der er beskrevet i afsnittene 4.2 og 4.3.6, og at denne understøttelse er detaljeret beskre- vet. 3.1.4.3
+ Underbilag 3.1 Kravspecifikation v1 Side 69 af 87
+ Krav vedr. publikation
+
+***  Afsnit 3.1.4.4-A K Publikation under anvendelse af faste udtræk xyz
+Løsningen skal understøtte publikation af dele af NPU-terminologien i form af en række faste udtræk som via web-portalen kan downloades fra Internettet. Tilbudsgiver bedes beskrive, hvordan Løsningen understøtter publikation af udvalgte dele af NPU-terminologien. Det vægter positivt, at Tilbudsgiver redegør for indhold af og adgang til centralt og nationalt release, for den overordnede udformning af de anvendte XML-skemaer og for tilgængeligheden af aktuelle og tidligere publikationer.
+
+*** 3.1.4.4 3.1.4.4-B K Fremstilling af og tilgang til faste udtræk
+Tilbudsgiver bedes beskrive hvordan Løsningen understøtter de i afsnit 4.4 angivne userstories vedrørende hhv centralt og nationalt release. Det vægter positivt at Tilbudsgivers beskrivelse er detaljeret.
+
+*** 3.1.4.4 3.1.4.4-C K Publikation under anvendelse af API
+Løsningen skal gennem et REST-baseret API stille tidstro NPU-data til rådighed for godkendte brugere. Det vægter positivt at Tilbudsgiver beskriver API'et, herunder adgang, mulighed for at specificere udtræk, udtræksformat og logning.
+
+*** 3.1.4.4 3.1.4.4-D K Publikation via web-portal
+Løsningen skal understøtte, at anonyme brugere gennem web-portalen kan hente NPU-terminologi i det omfang, der er beskrevet i afsnit 4.4.4, Visning af søgeresultat. Det vægter positivt at Tilbudsgivers beskrivelse er detaljeret, herunder at den omfatter en præcis beskrivelse af, hvilke data, der gøres tilgængelige for den anonyme bruger.
+
+*** 3.1.4.4 3.1.4.4-E K Adgang til web-portalen med mobile devices
+Web-portalen skal have responsivt design, således at anonyme brugere kan tilgå web-portalen under anvendelse af gængse browsere for tablets og smartphones, både til Android og IOS. Tilbudsgiver skal angive de kombinationer af operativsystem og browser, hvormed web-portalen kan benyttes af mobile enheder. Det vægter positivt, at web-portalens fulde funktionalitet kan tilgåes med flere browsere og både på android og IOS. 3.1.4.4 3.1.4.4-F K Download af releases understøttesBrugere, der har adgang til at hente releases fra web-portalen, skal efter login møde en brugergrænseflade, der giver overblik over de tilgængelige releases.Det vægter positivt at Tilbudsgiver beskriver, hvordan web-portalens brugergrænseflade understøtter overblik over og download af releases, som det fremgår af udbudsmaterialets userstories. 3.1.4.4
+ Underbilag 3.1 Kravspecifikation v1 Side 70 af 87
+ SWE
+ NOR
+ XX1
+ XX2
+ 6 NON-FUNKTIONELLE KRAV
+ Arkitektur
+ Løsningen består overordnet af tre adgange til en fælles back- end:
+ - en avanceret applikation (redigeringsværktøjet), der gør det muligt for redaktører via Internettet at vedligeholde og publicere NPU-terminologi
+ - et REST-baseret API til download af NPU-data – foreløbigt med begrænset funktionalitet som angivet i afsnit 4.4.3.
+ - en simpel web applikation (web-portalen),
+ o gør det muligt for redaktører at hente centrale releases
+ o gør det muligt for registrerede brugere at hente natio- nale releases
+ o gør det muligt for anonyme brugere at foretage søgning og downloade tidstro NPU-data
+ Redaktør
+ LabTerm2
+ Elementtermer og Soegetermer
+ Centralt release
+ Svensk nationalt
+ release
+ National redaktør
+ Elementbegreber
+ Norsk nationalt
+ release
+ Anonym bruger
+ NpuBegreber
+ DNK
+ Dansk nationalt
+ release
+ Dansk registreret bruger
+ Figur 6. LabTerm2, overblik, jf. nedenstående
+ Ovenstående Figur 6 illustrerer i et logisk perspektiv, hvordan LabTerm2 er et stand-alone-system, der stiller en række ser- vices til rådighed for forskellige brugertyper. Bemærk, at figuren anskuer løsningen i logisk perspektiv, og således ikke tager stil- ling til, om løsningens back-end realiseres med én eller flere da- tabaseinstanser.
+ Underbilag 3.1 Kravspecifikation v1 Side 71 af 87
+ Løsningen skal i sin primære form understøtte vedligeholdelse og publikation af international og dansk NPU-terminologi – altså arbejdet i IRC og det danske NRC. På sigt skal Løsningen kunne udvides til også at understøtte NPU-arbejdet i andre nationale releasecentre og i "virtuelle releasecentre" som vist udtonet på Figur 6.
+ Som redaktør skal man kunne tilgå Løsningens fulde funktionali- tet via Internettet. Det skal bemærkes, at denne kravspecifika- tion ikke tager stilling til, om redaktørernes adgang (redigerings- værktøjet) implementeres som en webapplikation (dvs. tilgåes med en Internet-browser) eller skal tilgåes med en lokal, dedi- keret klient.
+ Overordnede tekniske krav
+ Nr Type Kravtekst Afsnit
+
+*** 3.1.6.2-A MK Sikring af dataintegritet og datakvalitet
+Løsningen skal være Master for internationale og nationale NPU-data og skal sikre dataintegritet og -kvalitet. Det er afgørende at man kan stole på systemets indhold og dets relationer mellem data-elementer.
+
+*** 3.1.6.2-B K Sikring mod inkonsistens
+Løsningen skal være robust. Hændelser som fx nedbrud hos klienten og udfald af datatransmission må ikke efterlade inkonsistente data i Løsningen. Tilbudsgiver bedes beskrive de tiltag, som sikrer data mod inkonsistens. Det vægter positivt at Tilbudsgiver i sin beskrivelse tager udgangspunkt i kritiske scenarier som fx store batch-operationer og dedikerede uploads af NPU-elementer.
+
+*** 3.1.6.2-C K Brug af standard- og open-source-komponenter
+Tilbudsgiver skal beskrive, hvilke komponenter der benyttes og hvordan komponenter kan udskiftes. Tilbudsgiver skal endvi- dere beskrive om der gøres brug af standard-komponenter el- ler 3. parts produkter som del af Løsningen og i så fald hvilke. For at understøtte Tilbudsgiveruafhængighed såvel som Kun- dens mulighed for videreudvikling, skal det tilstræbes at an- vende standardkomponenter eller open source komponenter i Løsningen. Anvendelsen af open source og standardkompo- nenter vægter derfor højere end en løsning udelukkende base- ret på proprietære komponenter. 3.1.6.2
+
+*** 3.1.6.2-D K Beskrivelse af teknologivalg
+Tilbudsgiver skal beskrive Løsningens underliggende teknologi og begrunde valget af denne. Det vægter positivt, at Løsningen er baseret på kendt og best- in-breed teknologi. 3.1.6.2
+ Nr Type Kravtekst Afsnit
+
+*** 3.1.6.2-E K Beskrivelse af brug af programmeringssprog og værktøjer
+Tilbudsgiver skal beskrive, hvilke programmeringssprog og værktøjer der benyttes, og redegøre for, i hvilket omfang doku- mentationens kvalitet er sikret gennem anvendelse af standar- der og guidelines. Det vægter positivt at Tilbudsgiver beskriver konsistente ret- ningslinjer for frembringelse af god kode- og dokumentations- kvalitet. 3.1.6.2
+
+*** 3.1.6.2-F K Beskrivelse af leverandøruafhængighed
+Tilbudsgiver skal beskrive, hvorledes Tilbudsgiver vil tilstræbe at levere en Løsning, der også kan vedligeholdes og videreud- vikles af andre leverandører.Det vægter positivt at vedligehol- delse og videreudvikling i stort omfang kan overtages af andre leverandører.
+
+3.1.6.2
+ Logisk og konceptuel model
+ Løsningsbeskrivelsen skal tage udgangspunkt i Kundens krav og konsekvent anvende Kundens fagtermer, som disse fremgår af kravspecifikationen.
+ Løsningen skal, som tidligere beskrevet baseres på en opdateret logisk datamodel, der er tæt knyttet til NPU-terminologiens overordnede konceptuelle model. Opdateringen af den logiske model har fortrinsvis vedrørt:
+ - Sondring mellem terminologiens internationale og natio- nale elementer
+ - Detaljering af historikoplysninger
+ - Forbedring af note-apparat
+ Løsningens logiske model er beskrevet i udbudsmaterialets un- derbilag 3.4. Modellen omfatter foruden klasse- og tilstandsdia- grammer en detaljeret beskrivelse af modellens klasser og attri- butter samt en række forretningsregler.
+ Med henblik på at sikre, at det er muligt at it-understøtte samt- lige af NPU-terminologiens essentielle funktionaliteter, er der en tæt sammenhæng mellem den konceptuelle og den logiske mo- del (se hhv. afsnit 3.1 og underbilag 3.4). Begge modellers væ- sentligste klasser/begreber fremstår med en kort beskrivelse i 'Appendix-1. Termer og begreber' i slutningen af dette doku- ment.
+ Løsningsbeskrivelsen skal omfatte en beskrivelse af Løsningens interne datamodel, og hvorledes den realiserer den specificerede logiske model.
+ Underbilag 3.1 Kravspecifikation v1 Side 73 af 87
+ Nr Type Kravtekst Afsnit
+
+*** 3.1.6.3-A K Anvendelse af fagtermer og -begreber.
+Løsningsbeskrivelsen skal tage udgangspunkt i Kundens krav og konsekvent anvende Kundens fagtermer og -begreber. Således skal funktionalitet, datamodeller, transportformater, navigering og brugerflade i enhver henseende være beskrevet under anvendelse af Kundens fagtermer, som de fremgår af kravspecifikationen, herunder specielt termlisten i underbilag 3.1's Appendix-1. Det vægter positivt, at det afgivne tilbud tydeligt tager udgangspunkt i kravspecifikationens fagtermer og -begreber.
+
+*** 3.1.6.3-B K Specifikation af datamodel
+Tilbudsgiver skal, som del af Løsningsbeskrivelsen, levere en arkitekturtegning af Løsningen, en specifikation af Løsningens fysiske datamodel og en detaljeret beskrivelse af, hvorledes den fysiske model realiserer den i underbilag 3.4 specificerede logiske datamodel. Det vægter positivt at Tilbudsgivers dokumentation er detaljeret og anvender standardiserede notationsformer. 3.1.6.3
+
+*** 3.1.6.3-C MK Understøttelse af logisk datamodel
+Løsningen skal i alle detaljer understøtte den i Underbilag 3.4 specificerede logiske datamodel. 3.1.6.3
+
+*** 3.1.6.3-D K Realisering af den logiske datamodel
+Tilbudsgiver skal beskrive Løsningens interne (fysiske) datamodel, og hvorledes den realiserer den i underbilag 3.4 specificerede logiske model. Det vægter positivt, at der foreligger en detaljeret og grafisk understøttet beskrivelse af, hvordan klasser og associationer i den specificerede logiske model udtrykkes under anvendelse af Løsningens interne datamodel. 3.1.6.3
+
+** Krav vedrørende migrering af data
+Labterm2 (Løsningen) skal erstatte det nuværende Labterm og således rumme international og dansk NPU-terminologi med al historik. Derfor skal NPU-data kunne migreres fra det nuværende system til Løsningen under anvendelse af et til formålet egnet format – fx samme format som centralt, fuldt release, jf. afsnit 4.4.1. Det skal være muligt selvstændigt at migrere internationale og nationale NPU-elementer. Som det er nævnt i afsnit 3.2 har det i det nuværende system været vanskeligt effektivt at adskille dansk og international terminologi, og derfor forestår der i forbindelse med migrering et arbejde med at foretage denne adskillelse. En del data afspejler desuden, at man i løbet af NPU-terminologiens levetid har haft varierende metoder og kvalitetskrav, hvorfor der forestår et arbejde med "datavask" – et arbejde som mest hensigtsmæssigt foretages før migrering af data til det ny system. Det skal pointeres, at ingen af disse opgaver – adskillelse af NPU-elementer efter releasecenter og generel datavask – er del af dette udbud. Begge opgaver forudsættes løst af Kunden således, at Tilbudsgiver i forbindelse med migrering kan forvente af modtage NPU-data, der – i forhold til det eksisterende system fremstår som konsistente og valide.
+
+*** 3.1.6.4-A K Tilbudsgivers beskrivelse af migreringsstrategi
+ Tilbudsgiver skal med udgangspunkt i Kundens krav foreslå en strategi for migrering af eksisterende NPU-data til Løsningen. Tilbudsgivers forslag skal omfatte en beskrivelse af importformat, NPU-elementers minimale datakvalitet, metode for fejlhåndtering og test, samt tidsakse for migreringen. Det vægter positivt, at Tilbudsgivers beskrivelse er detaljeret, herunder at den forholder sig til terminologiens særlige forhold som fx koder, id'er, tegnsæt, separation i forhold til releasecenter.
+
+*** 3.1.6.4-B K Leverandørens og Kundens ansvar
+ Ved migreringen er det Kundens ansvar at levere NPU-data i et format, i en kvalitet og indenfor en tid som aftalt med Leverandøren. Det er Leverandørens ansvar at foretage importen, at forestå fejlhåndteringen og at udføre test af migreringen. Det vægter positivt at Leverandøren har beskrevet hvorledes import, fejlhåndtering og test af migrering håndteres. 3.1.6.4
+
+*** 3.1.6.4-C MK Migrering af alle data
+ Det er afgørende, at den komplette datamængde i nuværende Labterm migreres til Løsningen, herunder også data, der umiddelbart ikke fuldt ud lever op til Løsningens valideringsregler. Der må ikke forekomme datatab af nogen art. 3.1.6.4
+
+** Krav til design af brugergrænseflader
+Som tidligere beskrevet har Løsningen to adgangsveje med brugergrænseflade. Da anvendelse og brugeradgang er forskellig, stilles der forskellige krav til de to adgangsvejes brugergrænseflader
+Redaktør-adgangen (redigeringsværktøjet)
+- Den avancerede adgang for redaktører (redigeringsværktøjet) kan enten være realiseret som web-applikation så adgang sker gennem en Internet-browser eller så adgang sker gennem en lokal, dedikeret klient.
+Underbilag 3.1 Kravspecifikation v1 Side 75 af 87
+- Der er ikke tale om en offentlig adgang, så hvis redige- ringsværktøjet realiseres som web-applikation, skal krav til offentligt tilgængelige web-sites ikke nødvendigvis overholdes.
+- Redigeringsværktøjet vil blive anvendt af specialister - primært fra IRC og dansk NRC - og Labterm2 vil være de- res daglige centrale arbejdsredskab. Brugergrænsefladen skal være designet til på rationel måde at redaktørernes arbejdsgange og skal være logisk for brugerne at an- vende.
+- Redigeringsværktøjets brugergrænseflade skal til brug for det internationale releasecenter og som default-sprog for andre releasecentre foreligge på engelsk. Modulet skal til brug for det danske releasecenter desuden være installe- ret med en dansk brugergrænseflade. Det skal være mu- ligt at tilføje yderligere brugergrænseflade-sprog.
+Web-portalen
+- Web-portalen er offentligt tilgængelig og skal derfor over- holde Lov om tilgængelighed af offentlige organers websteder og mobilapplikationer14.
+- Web-portalen har både en åben del med adgang for ano- nyme brugere og en del, hvor redaktører og registrerede brugere efter login kan hente releases. Webportalen skal primært være designet for de anonyme brugere med ty- delig og udførlig hjælp.
+- Da der ikke kan stilles krav til anonyme brugeres it-plat- form, skal web-portalen kunne tilgåes gennem de mest almindelige browsere.
+- Brugere kan i web-portalen skifte sprog. Webportalen skal derfor omfatte brugergrænseflade på flere sprog. Web- portalen skal initialt leveres med brugergrænseflade på engelsk og dansk. Det skal være muligt at tilføje yderli- gere brugergrænsefladesprog
+Generelt
+- Al brugerrettet dokumentation, herunder brugermanual og vejledninger, skal foreligge på engelsk og dansk og skal leveres i et af kunden udpeget repository.
+- Det skal være muligt at tilføje brugerrettet dokumentation på yderligere sprog.
+14 Lov om tilgængelighed af offentlige organers websteder og mobilapplikationer:
+https://www.retsinformation.dk/Forms/R0710.aspx?id=201794
+Underbilag 3.1 Kravspecifikation v1 Side 76 af 87
+- Enhver del af Løsningen skal entydigt fremstå som en ser- vice leveret af Sundhedsdatastyrelsen.
+Nr Type Kravtekst Afsnit
+
+** 3.1.6.5-A K Redaktørernes arbejdsgange understøttes
+Redigeringsværktøjets brugergrænseflade skal være optime- ret til, at den anvendes af specialister, der har Løsningen som deres centrale daglige arbejdsredskab. Brugergrænse- fladen skal understøtte effektive arbejdsgange hos anven- derne. Det vægter positivt at Tilbudsgiver beskriver, hvordan redige- ringsværktøjets brugergrænseflade understøtter de arbejds- gange for redaktører, der fremgår af udbudsmaterialets user- stories. 3.1.6.5
+
+** 3.1.6.5-B K Anonyme brugeres anvendelse understøttes
+Web-portalens brugergrænseflade skal være optimeret til at give brugere uden forudkendskab overblik over portalens ind- hold og give mulighed for fremsøgning af NpuBegreber. Det vægter positivt at Tilbudsgiver beskriver, hvordan web- portalens brugergrænseflade understøtter anonyme brugeres overblik og deres mulighed for fremsøgning af NpuBegreber, som det fremgår af udbudsmaterialets userstories. 3.1.6.5
+
+** 3.1.6.5-C K Hjælp til brugere
+Til alle former for brugere bør brugergrænsefladen omfatte hjælp, der understøtter brugernes anvendelse. Det vægter positivt at hjælpens art og omfang er tilpasset de intenderede brugere. Det vægter desuden positivt, at bruger- fladens hjælp i redigeringsværktøjet kan gradueres individu- elt. 3.1.6.5
+
+** 3.1.6.5-D MK Adgang til web-portalen
+Web-portalens fulde funktionalitet skal være tilgængelig over Internettet vha. HTTPS. 3.1.6.5
+
+** 3.1.6.5-E K Adgang til web-portalen
+Web-portalen skal kunne tilgåes med gængse Internet-brow- sere. Tilbudsgiver skal eksplicit angive de browsere til desk- top, hvormed web-portalen kan tilgåes. Det vægter positivt, at web-portalens fulde funktionalitet kan tilgåes med mange forskellige, moderne Internet-browsere. 3.1.6.5
+
+** 3.1.6.5-F K Web-portalens brugergrænseflade
+Web-portalen skal baseres på W3C HTML5 og være tilgæn- gelig gennem internet-browser uden at kræve yderligere kli- ent-installeret software. Tilbudsgiver skal beskrive eventuelle funktioner, der afviger fra normativ W3C HTML5. Det vægter positivt at Løsningen overholder normativ W3C HTML5. 3.1.6.5
+Underbilag 3.1 Kravspecifikation v1 Side 77 af 87
+Nr Type Kravtekst Afsnit
+
+** 3.1.6.5-G K Brugerinddragelse i udformningen af views
+Tilbudsgiver skal fremlægge en plan for, hvordan man vil ind- drage brugere i udformningen af views. Det vægter positivt at brugerinddragelse sker tidligt i processen, at udgangspunktet er de i udbudsmaterialet beskrevne views og at brugerinddra- gelsen er baseret på mock-ups. 3.1.6.5
+
+** 3.1.6.5-H MK Løsningens overordnede fremtræden
+Enhver del af Løsningen skal entydigt fremstå som en ser- vice leveret af Sundhedsdatastyrelsen. Løsningen skal tyde- ligt vise information om Kunden (logo, adresse, e-mail). Den må ikke fremvise referencer eller links til leverandøren. 3.1.6.5
+
+** 3.1.6.5-I MK Krav til offentligt tilgængelige web-sites
+Web-portalen skal overholde Lov om tilgængelighed af of- fentlige organers websteder og mobilapplikationer (https://www.retsinforma- tion.dk/Forms/R0710.aspx?id=201794) 3.1.6.5
+
+** 3.1.6.5-J I Krav til offentligt tilgængelige web-sites
+Tilbudsgiver bedes beskrive, hvordan den del af Løsningen, som stilles til rådighed for anonyme brugere, opfylder loven om webtilgængelighed, jf. Digitaliseringsstyrelsens Q&A om dette emne: https://digst.dk/digital-service/webtilgaengelig- hed/spoergsmaal-og-svar-qa/ 3.1.6.5
+
+** 3.1.6.5-K K Redigeringsværktøjets brugergrænsefladesprog
+Al information i redigeringsværktøjets brugergrænseflader, herunder menupunkter, ledetekster, funktionsknapper og hjælpetekster, skal foreligge på engelsk - til brug for det inter- nationale releasecenter og som default-sprog for andre relea- secentre - og på dansk. Det vægter positivt, at det er beskrevet, hvorledes det håndteres at redigeringsværktøjets brugergrænseflader foreligger på engelsk og danske. 3.1.6.5
+
+** 3.1.6.5-L MK Web-portalens brugergrænsefladesprog
+Brugere i web-portalen skal kunne vælge sprog, og web-por- talen skal derfor omfatte brugergrænseflade, herunder menu- punkter, ledetekster, funktionsknapper og hjælpetekster, på flere sprog. Web-portalen skal initialt leveres med bruger- grænseflade på engelsk og dansk. 3.1.6.5 3.1.6.5-M K Tilføjelse af brugergrænsefladesprog i web-portalen Det skal være muligt til web-portalen at tilføje brugergrænse- flade, herunder menupunkter, ledetekster, funktionsknapper og hjælpetekster, på yderligere sprog i form af sprogpakker. Tilbudsgiver bedes detaljeret beskrive processen med at til- føje et nyt brugerflade-sprog. Det vægter positivt at processen er simpel og fuldt ud kan udføres af Kunden. 3.1.6.5 3.1.6.5-N MK Adgang til brugerrettet dokumentation Brugerrettet dokumentation, herunder brugermanual og vej- ledninger, skal kunne downloades fra et af kunden udpeget repository. 3.1.6.5
+Underbilag 3.1 Kravspecifikation v1 Side 78 af 87
+Nr Type Kravtekst Afsnit 3.1.6.5-O K Tilføjelse af brugerrettet dokumentation Det skal være muligt at tilføje yderligere brugerrettet doku- mentation, herunder brugermanual og vejledninger på andre sprog, i form af sprogpakker. Tilbudsgiver bedes detaljeret beskrive processen med at til- føje brugerrettet dokumentation på et nyt sprog. Det vægter positivt at processen er simpel og fuldt ud kan udføres af Kunden. 3.1.6.5
+Leverance
+Umiddelbart efter kontraktens indgåelse starter en afklarings- fase, hvorunder Kunden og Leverandøren sikrer en fælles forståelse af leverancens omfang. Med henblik på etablering af fælles forståelse kan det være hensigtsmæssigt, at Leverandø- ren – evt. med mockups - demonstrerer sin forståelse af det efterspurgte system og dets ønskede funktionalitet.
+Kunden ønsker at monitorere udviklingsforløbet gennem konse- kutive beskrivelser af systemets modenhedsgrad udtrykt ved hjælp af TRL-skala, jf. APPENDIX-2.
+Før Leverandøren overdrager Leverancen til Kunden skal der ud- føres en overtagelsestest, jf. bilag 14, Test. Overtagelsestest har til formål at undersøge, om Leverancen på overtagelsestids- punktet er fejlfri, stabil og opfylder de fastlagte krav.
+Leverandøren udarbejder på baggrund af Kundens krav en plan for overtagelsestest samt udarbejder en rapport, der beskriver resultatet af overtagelsestesten.
+Leverandøren skal til Kunden levere de kundespecifikke frem- bringelser, herunder kildekode og dokumentation, som udvikles under aftalen. Leverancen skal ske i et af kunden udpeget repo- sitory.
+Dokumentation af Løsningen bør leveres sammen med den spe- cialudviklede kildekode, dog er dette ikke et krav.
+Underbilag 3.1 Kravspecifikation v1 Side 79 af 87
+Nr Type Kravtekst Afsnit 3.1.6.6-A K Leverancens understøttelse af userstories Med henblik på præcis afgrænsning af Leverancen, skal Til- budsgiver eksplicit oplyse, hvilke af de i underbilag 3.1 be- skrevne userstories, som den færdige Løsningen understøtter på TRL-niveau 7 eller derover. Vedrørende TRL henvises til Appendix-2 i underbilag 3.1. Det vægter positivt, at mange af de beskrevne userstories un- derstøttes af den færdige Løsningen. 3.1.6.6 3.1.6.6-B MK Demonstration af Leverancens understøttelse af usersto- ries Det er en essentiel del af leverancens afsluttende accepttest, at Leverandøren tester og demonstrerer, at alle de i krav 3.1.6.6-A oplyste userstories er understøttet på TRL-niveau 7 eller derover. 3.1.6.6 3.1.6.6-C MK Fremdrift i Leverancens understøttelse af userstories Leverancen skal omfatte en tidsplan, der gør det muligt at kontrollere og sikre leverancens fremdrift. Tidsplanen skal un- der udviklingen holdes opdateret og skal med TRL-score for hver af de i krav 3.1.6.6-A oplyste userstories beskrive mo- denhedsgraden på udbudstidspunktet, ved accepttesten og ved 4 til 6 her imellem liggende tidspunkter. 3.1.6.6 3.1.6.6-D K Metode til sikring af dækkende test Tilbudsgiver skal sikre, at alle applikationsrelaterede krav fra kravspecifikationens afsnit ’5 Funktionelle krav’ er dækket af mindst én test case på tværs af testplaner, og at der er spor- barhed mellem krav og test cases. Tilbudsgiver skal i forbin- delse med tilbudsafgivelse beskrive, hvorledes dette sikres. Det vægter positivt at Tilbudsgiver har en beskrevet og afprø- vet metode for sikring af, at alle funktionelle krav testes. 3.1.6.6 3.1.6.6-E MK Leverance af kundespecifikke frembringelser Tilbudsgivers kundespecifikke frembringelser, herunder kilde- kode og dokumentation skal leveres i et af kunden udpeget repository. 3.1.6.6
+Underbilag 3.1 Kravspecifikation v1 Side 80 af 87
+Nr Type Kravtekst Afsnit 3.1.7.2-A K Præproduktionsmiljø Leverandøren skal stille et præproduktionsmiljø, som er iden- tisk med produktions-miljøet, til rådighed for Kunden. 3.1.7.2
+Option-3: Forlængelse af kontrakten
+Det skal være muligt for Kunden at forlænge kontrakten for ligeholdelse, support og drift med 2 gange 12 måneder.
+Forlængelse af kontrakten er her medtaget som option med gende krav:
+ved- føl-
+7 OPTIONER
+Option-1: Videreudvikling
+Der kan vise sig behov for videreudvikling af Løsningen. Det kunne fx vedrøre vedligeholdelse af national information om grupperet visning af analyseresultater (jf. afsnit 3.1.2), etable- ring og vedligeholdelse af den administrative sammenhæng mel- lem brugerkommunikationen og de omhandlede NPU-begreber eller anden udvikling nødvendiggjort af ændret lovgivning eller udvikling på laboratorieområdet.
+Videreudvikling med op til 1000 timers generel udviklingstid er her medtaget som option med følgende krav:
+Nr Type Kravtekst Afsnit 3.1.7.1-A K Videreudvikling Leverandøren skal i underbilag 12.1, Vederlag angive timepri- ser for videreudvikling af Løsningen. 3.1.7.1
+Option-2: Præproduktionsmiljø
+Der er i bilag 14, Test angivet, at Kunden og Leverandøren i af- klaringsfasen endeligt skal afklare behovet for testmiljøer. Så- fremt det vurderes, at der ikke er behov for et præproduktions- miljø, skal et sådant kunne etableres på et senere tidspunkt, hvis behovet herfor udvikler sig over tid.
+Etablering af et præproduktionsmiljø er her medtaget som op- tion med følgende krav:
+Underbilag 3.1 Kravspecifikation v1 Side 81 af 87
+Nr Type Kravtekst Afsnit 3.1.7.3-A MK Forlængelse af kontrakt Det skal være muligt for Kunden at forlænge kontrakten for vedligeholdelse, support og drift med 2 gange 12 måneder. 3.1.7.3
+Underbilag 3.1 Kravspecifikation v1 Side 82 af 87
+APPENDIX-1. TERMER OG BEGREBER
+Term Mening aktiv-dato den dato, hvor et NPU-element blev sat i status 'aktiv'
+aktivere
+NPU-elementer gennemløber en livscyklus beskrevet ved et antal tilstande ('states'). At 'aktivere' er at skifte et NPU-ele- ments status til 'aktiv'. aktuelle release- center Det releasecenter, som redaktøren aktuelt arbejder indenfor. I udgangspunktet arbejder redaktører indenfor det releasecen- ter, de er tilknyttet, men redaktører med særlige rettigheder kan skifte mellem flere releasecentre.
+aktuelle sprog
+Det sprog, som redaktøren arbejder indenfor.
+Et releasecenter kan arbejde indenfor flere sprog, og det er derfor muligt for en redaktør at skifte mellem releasecentrets sprog. API Application Programming Interface er en grænseflade til et system, der gør det muligt programma- tisk at tilgå systemet fra andre systemer og/eller komponenter.
+baggrundsdata
+Kun licenserede brugere har adgang til NPU-terminologiens baggrundsdata. Disse omfatter med reference til den logiske model flg. klasser:
+- Elementbegreb + aggregerede elementer:
+o Elementterm
+o DefinerendeReference
+- Organisation
+- Terminologirelation
+- Soegeterm
+- Syntaxgruppe Brugsnavn Brugsnavne (Nationale KortNavne) er alternative navne for NpuBegreber. Brugsnavne er udarbejdet med henblik på vis- ning af laboratorieresultater, fx skærmvisning af laboratoriere- sultater i en klinisk kontekst.
+centrale NPU-ele- menter
+Løsningens funktionaliteter er med dedikerede views primært rettet mod de centrale NPU-elementer, der er angivet i afsnit 4.2:
+- Elementbegreb
+- Organisation
+- NpuBegreb
+- Søgeterm
+- Brugsnavn
+- Terminologirelation Se evt. også "NPU-element" DefinerendeRefe- rence Definition af Elementbegreb - enten ved reference til en ekstern Organisations definition eller med reference til et NPU-release- center og angivelse af releasecentrets tekstuelle definition.
+Underbilag 3.1 Kravspecifikation v1 Side 83 af 87
+Term Mening
+direkte
+I denne kravspecifikation anvendes flere gange vendinger som 'direkte at åbne/angive/oprette/importere' etc. Meningen er overalt den samme: at funktionaliteten skal udløses med et en- kelt klik eller angivelse af en enkelt værdi. DNK-begreb Et NpuBegreb til udelukkende dansk national anvendelse. NpuBegreber kan være internationale eller nationale - af- hængigt af, hvilket releasecenter, som "ejer" begrebet. De for- skellige releasecentres NpuBegreber har forskelligt præfix i ko- den, hvor det internationale releasecenters koder starter med 'NPU' og det danske releasecenters koder starter med 'DNK'.
+Elementbegreb
+Et veldefineret begreb, der kan udgøre en del af NPU syntak- sens struktur. Elementbegreb har udover en definition tilknyttet mindst én term i form af Elementterm. ElementbegrebLi- ste Klasse, som udtrykker Elementbegrebers rækkefølge indenfor en Syntaxgruppe.
+ElementSoegeterm
+Klasse, som udtrykker sammenhængen mellem Elementbegre- ber og deres tilknyttede Soegetermer. Elementterm Uforkortet (termLang) eller forkortet (termKort) sprogligt udtryk for et Elementbegreb.
+gyldig-dato
+den dato, hvorfra et NPU-element er gyldigt - anført i attributten medVirkningFra i det associerede Kontekst-objekt, som har statusType= 'aktiv'. inaktivere NPU-elementer gennemløber en livscyklus beskrevet ved et antal tilstande ('states'). At 'inaktivere' er at skifte et NPU-ele- ments status til 'inaktiv'. NPU-elementer, der har været i status 'aktiv', slettes principielt aldrig.
+IRC
+Internationalt releasecenter, se Releasecenter Kort helterm NPU-definition udtrykt med brug af forkortet termer (term- Kort) hvor den forefindes, i alle syntakspositioner undtagen Komponent position 0. For Elementbegreb hvor termKort ikke er angivet, bruges termLang. Bemærk at lang og kort helterm ikke figurerer i den logiske mo- del, da de alene er bygget ved konkatenering af Elementtermer på grundlag af syntax-rækkefølge.
+Lang helterm
+NPU-definition udtrykt med brug af uforkortede Elementtermer (termLang) sammensat efter valgt syntaks.
+Bemærk at lang og kort helterm ikke figurerer i den logiske mo- del, da de alene er bygget ved konkatenering af Elementtermer på grundlag af syntax-rækkefølge.
+Underbilag 3.1 Kravspecifikation v1 Side 84 af 87
+Term Mening licenseret bruger En licenseret bruger er i denne forbindelse en bruger, der di- rekte arbejder under en licens til at anvende NPU-terminolo- gien og derfor har adgang til NPU-terminologiens baggrunds- data. Kun internationale og nationale redaktører er licenserede brugere.
+NpuBegreb
+En beskrivelse af analyseresultat udtrykt som et sæt af Ele- mentbegreber ordnet i en fast syntaks. NPU-definition En sproglig beskrivelse af NpuBegreb med termer for syntak- sens Elementbegreb i specificeret rækkefølge og med specifi- cerede skilletegn.
+NPU-derivater
+Er samlebetegnelsen for nationale oversættelser og udvidelser af den internationale NPU-terminologi. NPU-element Samlebetegnelse for de overordnede begreber, der tilsammen danner den overordnede NPU-model - dvs. alle de begreber, som udgør den konceptuelle model, og de klasser, der er vist i klassediagrammet 'NPU-elementer". Se også "centrale NPU- elementer".
+NPU-gruppe
+En ordnet samling af NpuBegreber, der udtrykker mulige analy- seresultater som konsekvens af en rekvisition, hvor resultatty- pen ikke er entydig.
+Fx vil en rekvisition af "Arteriel blodgas" kunne udløse analyse- resultater både af typen "Ilt-mætning" og "kulsyre-indhold". NpuGruppeListe Klasse, som udtrykker rækkefølgen af NpuBegreber, som til- sammen danner en NpuGruppe.
+NpuSoegeterm
+Klasse, som udtrykker sammenhængen mellem NpuBegreber og deres tilknyttede Soegetermer. NRC Nationalt releasecenter, se Releasecenter
+Organisation
+Klasse, som udtrykker den Organisation, der er kilden til defini- tion af et Elementbegreb, jf. DefinerendeReference Redigeringsværktø- jet LabTerm2's redigeringsværktøj er den applikation, der gør det muligt for redaktører via Internettet at vedligeholde og publicere NPU-terminologi
+Releasecenter
+Det internationale releasecenter (IRC) er ansvarlig for drift og udvikling af den internationale version af NPU-terminologien. Et nationalt releasecenter (NRC) oversætter internationale NPU-begreber og varetager kontakten til de nationale brugere. REST REpresentational State Transfer - en moderne, simpel og web- nær arkitektur til udveksling af data mellem løst koblede syste- mer. Se evt. https://www.codecademy.com/articles/what-is-rest
+Underbilag 3.1 Kravspecifikation v1 Side 85 af 87
+Term Mening
+Soegeterm
+Tekst-streng beregnet på at matche brugerens søgeord. Både Elementbegreber og NpuBegreber kan have tilknyttede søge- termer med henblik på fremfinding. Syntaxgruppe Specifik del af den begrebsstruktur, som identificerer et Npu- Begreb og derigennem strukturerer dets sproglige udtryk i form af Lang eller Kort helterm. NpuBegrebers overordnede struktur er givet af denne række- følge af Syntaxgrupper: - System: den undersøgte del af universet (patienten) - Komponent: den del af systemet, der er fokus for undersø- gelsen - Egenskabsart: den type egenskab for komponenten i syste- met, som resultatværdien beskriver - Enhed (hvis relevant)
+sætte i kladde
+NPU-elementer gennemløber en livscyklus beskrevet ved et antal tilstande ('states'). At 'sætte i kladde' er at skifte et NPU- elements status til 'kladde'. sætte klar til frigi- velse NPU-elementer gennemløber en livscyklus beskrevet ved et antal tilstande ('states'). At 'sætte klar til frigivelse' er at skifte et NPU-elements status til 'klar til frigivelse'.
+Terminologirelation
+Relation mellem Elementbegreb eller NpuBegreb og begreber i en anden terminologi eller klassifikation TRL Technology Readiness Level TRL-skalaen for software graduerer dels funktionel parathed, altså i hvor høj grad det er påvist, at et system har vist sig at dække brugernes behov, dels non-funktionel parathed, altså i hvor høj grad systemet er testet/afprøvet til at kunne holde til brugernes anvendelse. TRL-skalaen for software er gengivet i APPENDIX-2 herunder.
+Versionsnote
+Meddelelse til formidling af, at der er sket brugerrelevante æn- dringer af NPU begreber. web-portalen LabTerm2's webportal er den adgang til systemet, som gør det muligt gennem en almindelig browser at foretage søgninger i NPU-data og at hente søgeresultater og publicerede releases
+Underbilag 3.1 Kravspecifikation v1 Side 86 af 87
+APPENDIX-2: TRL-SKALA FOR SOFTWARE15
+TRL Karakteristika Kommentarer 1 Grundprincipper obser- veret og rapporteret Laveste niveau af softwareteknologi parathed. Et nyt software domæne undersøges. Dette niveau omfatter dokumentation af grundlæggende anven- delse og grundlæggende arkitektur egenskaber.
+2
+Teknologi koncept og/el- ler anvendelse formule- ret
+Når de grundlæggende principper er observeret og dokumenteret, kan formulering af anvendelse på- begyndes. Anvendelsen er spekulativ og baseret på antagelser. Der er muligvis ingen/minimal bevis eller analyse der kan supplere antagelserne. 3 Analyse, design og evt. Proof of Concept (PoC) Aktiv R&D påbegyndes. Niveau hvor den videnska- belige gennemførlighed er påvist gennem analyti- ske- og laboratorieundersøgelser. Dette niveau omfatter udviklingen af begrænset funktionalitet til validering af kritiske egenskaber og analytiske for- udsigelser (Proof of Concept).
+4
+Modul og/eller delsy- stem validering i et ud- viklingsmiljø
+Grundlæggende komponenter/systemer udvikles og integreres til at fastslå, at de kan arbejde sam- men. De er relativt primitive med hensyn til effekti- vitet og robusthed i forhold til den endelige løsning. Arkitekturudvikling igangsat for at inkludere inter- operabilitet, pålidelighed, vedligeholdelse, udvidel- sesmuligheder, skalerbarhed og sikkerhedsspørgs- mål. Emulering med eksisterende komponenter/sy- stemer kan inkluderes. 5 Modul og/eller delsy- stem validering i et rele- vant miljø Niveau hvor nye komponenter/systemer er klar til integration med eksisterende komponenter/syste- mer. Implementeringer i overensstemmelse med definerede snitflader og arkitekturen er etableret. Forsøg med realistisk anvendelse gennemføres.
+6
+Modul og/eller delsy- stem validering i et rele- vant end-2-end miljø
+Niveau hvor den tekniske gennemførlighed af nye komponenter/systemer er påvist. Dette niveau om- fatter gennemførelse af realistisk fuldskala anven- delse på relevant end-2-end miljø, hvor komponen- ter/systemer er integreret med eksisterende kom- ponenter/systemer. 7 System demonstration i et produktionslignende miljø Niveau hvor den virkelighedsnære gennemførlig- hed af nye komponenter/systemer er påvist. Funkti- onalitet er implementeret og tilgængelig til perfor- mance- og acceptancetest på et produktionslig- nende miljø, hvor komponenter/systemer er inte- greret med eksisterende komponenter/systemer.
+15 Fra 'Systemteknisk målbillede for digital understøttelse af komplekse tværgående patientforløb', Sundhedsdatastyrelsen, 2016 ( https://sundhedsdatastyrelsen.dk/-
+/media/sds/filer/rammer-og-retningslinjer/komplekse-forloeb/sammenhaengende- patientforloeb/maalbillede-digital-understoettelse-komplekse-forloeb.pdf )
+Underbilag 3.1 Kravspecifikation v1 Side 87 af 87
+TRL Karakteristika Kommentarer
+8
+Færdigt system der er kvalificeret gennem test og demonstration i et produktionsmiljø
+Niveau hvor nye komponenter/systemer er fuldt ud implementeret og integreret med eksisterende komponenter/systemer på produktionsmiljøet. Al funktionalitet testet i simulerede og operationelle scenarier (pilotdrift med udvalgte anvendere). Sy- stem- og driftdokumentationen er komplet. 9 Færdigt system bevist gennem vellykket fuld skala udbredelse Niveau hvor nye komponenter/systemer er ibrugta- get og udrullet i stor skala.

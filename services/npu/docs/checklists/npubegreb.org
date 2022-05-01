@@ -1,0 +1,13 @@
+* Guideline - Nyt modul xyz
+60. Åbn generatorNpu-projektet og opret en xyz.xml fil i ~/npu/generatorNpu/definitions/. Husk at angive ifnavn attribut for ManyToOne entiteter og enumns
+70. Generer og kopier output til en editor
+260. Optionelt - tilføj eksempelattributter i migration insert statements
+270. Lav en ny xyz volume under src/main/java/cgi/labterm/services/npu/repositories og kopier repositoryklasser fra ../repositories/organisation
+280. Lav søg og erstat i det volume på organisation med xyz (bevar case) . Og omdøb de enkelte filer fra organisation til xyz. (og evt. fjern metoder)
+290. Kopier src/main/java/cgi/labterm/services/npu/service/OrganisationService.java til ../XyzService.java og lav søg-og-erstat i filen med organisation til xyz (bevar case)
+300. Så det bare at tilrette den nye serviceklasse
+310. Kopier src/main/java/cgi/labterm/services/npu/controller/OrganisationController.java til ../XyzController.java og lav søg-og-erstat i filen med organisation til xyz (bevar case)
+320. Tilret controllerklasse
+33. 
+    
+   
