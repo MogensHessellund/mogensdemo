@@ -1,6 +1,6 @@
 # demo 2
 
-Lapterm2 repository (NPU)
+Lapterm2 repository (DEMO)
 
 ## Jaeger
 

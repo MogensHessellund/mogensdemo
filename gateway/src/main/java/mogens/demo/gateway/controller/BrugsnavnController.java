@@ -37,7 +37,7 @@ public class BrugsnavnController {
      * Fremsøger Brugsnavn ud fra databasens id-kolonne. Ved positivt id er det fra de aktive elementer og ved negativt id er det fra kladdeland
      *
      * @param id id
-     * @return modelobjekt eller en NpuelementNotfoundException
+     * @return modelobjekt eller en DemoelementNotfoundException
      */
     @GetMapping("/brugsnavn/id")
     public BrugsnavnModel getBrugsnavn(@RequestParam long id) {
@@ -45,12 +45,12 @@ public class BrugsnavnController {
     }
 
     /**
-     * Opretter Brugsnavn i kladde-tilstand. Der er ingen validering udover eksistensen af Releasecenter, samt at de angivne Elementbegreber eller Npubegreber skal eksistere
+     * Opretter Brugsnavn i kladde-tilstand. Der er ingen validering udover eksistensen af Releasecenter, samt at de angivne Elementbegreber eller Demobegreber skal eksistere
      *
      * @param elmt brugsnavn
-     * @return Det nyoprettede NPU-element, nu med id
+     * @return Det nyoprettede DEMO-element, nu med id
      */
-    @PostMapping("/npu/brugsnavn/new")
+    @PostMapping("/demo/brugsnavn/new")
     public BrugsnavnModel newBrugsnavn(@RequestBody BrugsnavnModel elmt) {
         HttpEntity<BrugsnavnModel> request = new HttpEntity<>(elmt);
         var ret = restTemplate.postForEntity(serviceurl + "/brugsnavn/new", request, BrugsnavnModel.class);
@@ -62,9 +62,9 @@ public class BrugsnavnController {
      *
      * @param elmt Element
      * @return brugsnavnmodel Det opdaterede elmt. Hvis opdatering ikke kan gennemføres sendes fejlkode og fejltekst med i objektet.
-     * Se fejlkoder i src/main/java/mogens/demo/lib/npu/NpuConst.java
+     * Se fejlkoder i src/main/java/mogens/demo/lib/demo/DemoConst.java
      */
-    @PostMapping("/npu/brugsnavn/update")
+    @PostMapping("/demo/brugsnavn/update")
     public BrugsnavnModel updateBrugsnavn(@RequestBody BrugsnavnModel elmt) {
         HttpEntity<BrugsnavnModel> request = new HttpEntity<>(elmt);
         ResponseEntity<BrugsnavnModel> ret = restTemplate.postForEntity(serviceurl + "/brugsnavn/update", request,

@@ -1,4 +1,4 @@
-filebeat.inputs:
+filebeat.idemots:
 - type: container
   paths: 
     - '/mnt/docker/containers/*/*.log'

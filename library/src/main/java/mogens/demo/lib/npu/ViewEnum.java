@@ -1,8 +1,8 @@
-package mogens.demo.lib.npu;
+package mogens.demo.lib.demo;
 
 public enum ViewEnum {
 	ORGANISATION("ORGANISATION"), 
-	NPUBEGREB("NPUBEGREB"), 
+	DEMOBEGREB("DEMOBEGREB"), 
 	ELEMENTBEGREB("ELEMENTBEGREB"), 
 	BRUGSNAVN("BRUGSNAVN"),
 	SOEGETERM("SOEGETERM"), 
