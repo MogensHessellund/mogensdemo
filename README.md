@@ -1,4 +1,4 @@
-# Labterm 2
+# demo 2
 
 Lapterm2 repository (NPU)
 

@@ -3,7 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-/services/npu/src/main/java/cgi/labterm/services/npu/service/exportcsv/files/
+/services/npu/src/main/java/mogens/demo/services/npu/service/exportcsv/files/
 
 ### STS ###
 .apt_generated

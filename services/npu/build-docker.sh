@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAG="labterm/npu"
+TAG="demo/npu"
 AZURE="darina.azurecr.io"
 
 docker build -t ${TAG} --rm=true .

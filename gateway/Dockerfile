@@ -2,7 +2,7 @@
 FROM darina.azurecr.io/build/java:17.0
 
 # Add Maintainer Info
-LABEL maintainer="mogens.hessellund@cgi.com"
+LABEL maintainer="mogens@gmail.com"
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8888

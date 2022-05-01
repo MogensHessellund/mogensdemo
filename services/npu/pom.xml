@@ -7,7 +7,7 @@
 		<version>2.5.6</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>cgi.labterm.services</groupId>
+	<groupId>mogens.demo.services</groupId>
 	<artifactId>npu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>npu</name>
@@ -17,7 +17,7 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>cgi.labterm</groupId>
+			<groupId>mogens.demo</groupId>
 			<artifactId>library</artifactId>
 			<version>${project.version}</version>
 		</dependency>

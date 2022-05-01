@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TAG="labterm/gateway"
+TAG="demo/gateway"
 AZURE="darina.azurecr.io"
 
 docker build -t ${TAG} --rm=true .

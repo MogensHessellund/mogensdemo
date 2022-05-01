@@ -12,9 +12,9 @@ services:
     container_name: postgres
     restart: unless-stopped
     environment:
-      - POSTGRES_PASSWORD=labterm
-      - POSTGRES_USER=labterm
-      - POSTGRES_DB=labterm
+      - POSTGRES_PASSWORD=demo
+      - POSTGRES_USER=demo
+      - POSTGRES_DB=demo
     volumes:
       - ./postgres-data:/var/lib/postgresql/data/
     ports:
@@ -40,7 +40,7 @@ services:
     environment:
       - KEYCLOAK_PASSWORD=keycloak
       - KEYCLOAK_USER=keycloak
-      - DB_DATABASE=labterm
+      - DB_DATABASE=demo
       - DB_USER=keycloak
       - DB_PASSWORD=keycloak
       - DB_SCHEMA=keycloak

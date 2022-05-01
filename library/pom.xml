@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>cgi.labterm</groupId>
+    <groupId>mogens.demo</groupId>
     <artifactId>library</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>labterm-library</name>
+    <name>demo-library</name>
     <description>Library for Labterm2</description>
 
     <packaging>jar</packaging>
