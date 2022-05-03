@@ -1,16 +1,13 @@
 package mogens.demo.services.entities;
 
-import mogens.demo.services.dto.MedlemDTO;
 import mogens.demo.services.dto.OrkesterDTO;
 import mogens.demo.services.entities.base.Kontekst;
 import mogens.demo.services.entities.enums.OrkesterType;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Audited
 @Table(name = "orkester")
 @Entity
 public class Orkester extends Kontekst {
@@ -43,7 +40,17 @@ public class Orkester extends Kontekst {
     private List<Medlem> medlemmer = new ArrayList<>();
 
     public static Orkester createOrkester(OrkesterDTO dto) {
-        return null;
+        Orkester ork = new Orkester();
+        ork.setBrugernavn(dto.getBruger());
+        ork.setBeskrivelse(dto.getBeskrivelse());
+        ork.setDirigent(dto.getDirigent());
+        ork.setForkortelse(dto.getForkortelse());
+        ork.setNavn(dto.getNavn());
+        ork.setFormand(dto.getFormand());
+        ork.setId(dto.getId());
+        ork.setTelefon(dto.getTelefon());
+        ork.setType(OrkesterType.valueOf(dto.getType()));
+        return ork;
     }
 
     public List<Medlem> getMedlemmer() {
