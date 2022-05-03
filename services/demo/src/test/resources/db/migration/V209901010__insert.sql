@@ -1,0 +1,2 @@
+INSERT INTO orkester (id,optlock,virkning_fra,active_at,created_at,updated_at,brugernavn,navn,forkortelse,"type",formand,telefon,beskrivelse,dirigent) VALUES
+    (1,0,NULL,NULL,'2022-05-02 16:51:32.357678+02',NULL,'mogens','Aarhus Amatoersymfoniorkester','AAM','Symfoniorkester','Jette','23232313','Amatørsymfoniorkester i Århus','Mathias');

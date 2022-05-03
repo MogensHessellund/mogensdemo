@@ -6,28 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BrugsnavnModel {
+public class MedlemModel {
     private long id;
     private int version;
-    private String status;
     private String createdAt;
-    private String updatedAt;
-    private String activeAt;
-    private String virkningFra;
     private String brugernavn;
-    private int fejlkode;
-    private String fejltekst;
-    private String releasecenter;
-    private String godkendendeOrganisation;
-    private String type;
-    private String term;
-    private String sprog;
-    private String notetekst;
+    private String navn;
+    private String instrument;
+    private boolean studerende;
+    private String telefon;
+    private int erfaring;
 }

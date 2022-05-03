@@ -1,29 +1,29 @@
 package mogens.demo.services.entities.base;
 
-import mogens.demo.services.entities.enums.Speciale;
+import mogens.demo.services.entities.enums.OrkesterType;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.util.stream.Stream;
 
 @Converter(autoApply = true)
-public class SpecialeConverter implements AttributeConverter<Speciale, String> {
+public class OrkesterTypeConverter implements AttributeConverter<OrkesterType, String> {
 
     @Override
-    public String convertToDatabaseColumn(Speciale speciale) {
-        if (speciale == null) {
+    public String convertToDatabaseColumn(OrkesterType orkesterType) {
+        if (orkesterType == null) {
             return null;
         }
-        return speciale.getNavn();
+        return orkesterType.getNavn();
     }
 
     @Override
-    public Speciale convertToEntityAttribute(String navn) {
+    public OrkesterType convertToEntityAttribute(String navn) {
         if (navn == null) {
             return null;
         }
 
-        return Stream.of(Speciale.values())
+        return Stream.of(OrkesterType.values())
                 .filter(c -> c.getNavn().equals(navn))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
