@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-FROM darina.azurecr.io/build/java:17.0
+FROM openjdk:11
 
 # Add Maintainer Info
 LABEL maintainer="mogens@gmail.com"
