@@ -5,7 +5,6 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
-@Audited
 @Table(name = "medlem")
 @Entity
 public class Medlem extends Kontekst {

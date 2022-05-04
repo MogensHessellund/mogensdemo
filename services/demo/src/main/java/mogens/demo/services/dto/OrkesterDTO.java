@@ -8,6 +8,7 @@ import mogens.demo.lib.gateway.model.OrkesterModel;
 import mogens.demo.services.entities.Medlem;
 import mogens.demo.services.entities.Orkester;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class OrkesterDTO extends KontekstDTO {
         OrkesterDTO dto = new OrkesterDTO();
         dto.setId(ork.getId());
         dto.setVersion(ork.getVersion());
-        dto.setCreatedAt(ork.getCreatedAt().toLocalDateTime().toString());
+        dto.setCreatedAt(ork.getCreatedAt() != null ? ork.getCreatedAt().toLocalDateTime().toString() : LocalDateTime.now().toString());
         dto.setBruger(ork.getBrugernavn());
         dto.setBeskrivelse(ork.getBeskrivelse());
         dto.setNavn(ork.getNavn());
@@ -38,6 +39,8 @@ public class OrkesterDTO extends KontekstDTO {
         dto.setBeskrivelse(ork.getBeskrivelse());
         dto.setDirigent(ork.getDirigent());
         dto.setMedlemmer(new ArrayList<>());
+        dto.setFormand(ork.getFormand());
+        dto.setForkortelse(ork.getForkortelse());
         for (Medlem medlem : ork.getMedlemmer()) {
             dto.getMedlemmer().add(MedlemDTO.toDto(medlem));
         }
@@ -52,6 +55,10 @@ public class OrkesterDTO extends KontekstDTO {
         dto.setTelefon(orkModel.getTelefon());
         dto.setBeskrivelse(orkModel.getBeskrivelse());
         dto.setDirigent(orkModel.getDirigent());
+        dto.setBruger(orkModel.getBrugernavn());
+        dto.setId(orkModel.getId());
+        dto.setForkortelse(orkModel.getForkortelse());
+        dto.setFormand(orkModel.getFormand());
         return dto;
     }
 
